@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- AssistedCity String elements -->
+	<string name="app_name">AssistedCity</string>
+	<string name="scan">Escanear</string>
+	<string name="help">Ayuda</string>
+	<string name="exit">Salir</string>
+	<string name="settings">Preferencias</string>
+	<string name="settings_simple">Settings-simple</string>
+	<string name="directions">Get directions</string>
+	<string name="location">Posición actual</string>
+	<string name="actual_coordinates">Coordenadas actuales</string>
+	<string name="piramide_webpage">http://www.piramidepse.com/</string>
+	<string name="help_message_title">
+		Bienvenido a la ciudad asistida.</string>
+		<string name="help_message_body">
+			Esta aplicación le ayudará a localizar los puntos de interés
+			que desee y le guiará por su ciudad hasta ellos. 
+		Para empezar, seleccione una de las categorías mostradas y, a
+		cotinuación,
+		seleccione uno de los puntos listados según la categoría seleccionada.
+		Una vez haya hecho esto, simplemente siga las indicaciones
+		por pantalla o por voz.
+	</string>
+	<string name="help_message_footer">
+		Buena suerte y que llegue bien a su destino. </string>
+
+	<string name="help_simple_message">Welcome to the Assisted City help-simple screen.
+	</string>
+	<string name="add_point">Add point</string>
+	<string name="remove_point">Remove point</string>
+</resources>

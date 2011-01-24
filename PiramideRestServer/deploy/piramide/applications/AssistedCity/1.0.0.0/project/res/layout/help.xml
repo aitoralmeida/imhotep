@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TableRow>
+		<ImageView android:id="@+id/img_help" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:src="@drawable/help">
+		</ImageView>
+	</TableRow>
+
+	<TableRow>
+		<TextView android:id="@+id/txt_help_title" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="@string/help_message_title">
+		</TextView>
+	</TableRow>
+	
+	<TableRow>
+		<TextView android:id="@+id/txt_help_body" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="@string/help_message_body">
+		</TextView>
+	</TableRow>
+	
+	<TableRow>
+		<TextView android:id="@+id/txt_help_footer" android:layout_width="wrap_content"
+			android:layout_height="wrap_content" android:text="@string/help_message_footer">
+		</TextView>
+	</TableRow>
+
+</TableLayout>

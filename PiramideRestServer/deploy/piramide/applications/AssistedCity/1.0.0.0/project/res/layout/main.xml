@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    style="@style/appTheme"
+	    android:orientation="vertical"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" 
+	    android:background="@color/white_background"
+	    android:gravity="center">
+    <TableRow>
+	     <TextView android:id="@+id/txt_piramide_webpage"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:text="@string/piramide_webpage"
+			    android:autoLink="web"
+			    android:paddingLeft="167px">
+	    </TextView>
+    </TableRow>
+    <TableRow>
+	    <ImageView android:id="@+id/img_piramide_logo"
+	    		android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:src="@drawable/piramide_logo"
+			    android:paddingLeft="80px">
+	    </ImageView>
+    </TableRow>
+</TableLayout>

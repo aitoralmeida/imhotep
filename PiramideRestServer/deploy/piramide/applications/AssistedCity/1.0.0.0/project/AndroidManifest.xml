@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="es.deustotech.piramide" android:versionCode="1"
+	android:versionName="1.0">
+	<application android:icon="@drawable/icon" 
+		android:label="@string/app_name"
+		android:debuggable="true">
+		<!-- AssistedCity Main Activity -->
+		<activity android:name=".activities.main.AssistedCity"
+			android:label="@string/app_name"
+			android:screenOrientation="landscape"
+			android:multiprocess="false"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+			android:launchMode="singleTask">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<!-- Activities -->
+		<activity android:name=".activities.PiramideCaptureActivity"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+		<activity android:name=".activities.options.OptionsList" 
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+			android:screenOrientation="landscape"/>
+		<activity android:name=".activities.location.Directions" 
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+			android:screenOrientation="landscape"/>
+		<activity android:name=".activities.location.Categories" 
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+		<activity android:name=".activities.location.Points"
+			android:screenOrientation="landscape"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+			<intent-filter>
+				<action
+					android:name="points" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".activities.location.CurrentLocation" 
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+			android:screenOrientation="landscape"/>
+		<activity android:name=".activities.options.Settings" 
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+			android:screenOrientation="landscape"/>
+		<activity android:name=".activities.options.SettingsSimple" 
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+			android:screenOrientation="landscape"/>
+		<activity android:name=".activities.options.Help" 
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+			android:screenOrientation="landscape"/>
+		<activity android:name=".activities.options.HelpSimple" 
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+			android:screenOrientation="landscape"/>
+		<!-- Services -->
+		<service android:name=".services.LocationService" >
+        	<intent-filter>
+           		<action android:name="prueba"/>
+    		</intent-filter>
+    	</service>
+	</application>
+	
+	<supports-screens android:largeScreens="true"/>
+
+	<!-- Permissions -->
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+
+	<uses-feature android:name="android.hardware.camera" />
+	<uses-feature android:name="android.hardware.camera.autofocus" />
+	<uses-feature android:name="android.hardware.camera.flash" />
+</manifest> 

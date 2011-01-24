@@ -1,0 +1,19 @@
+{
+	"piramide.devices.screen.height"       					: 800,
+	"piramide.devices.screen.width"        					: 480,
+	"piramide.devices.modelname"    						: "HTC Desire",
+	"piramide.devices.os"									: "Android",
+	"piramide.devices.os.version"							: "2.2"
+	"piramide.devices.capabilities.video"					: true,
+	"piramide.devices.capabilities.audio"					: true,
+	"piramide.devices.capabilities.gps"						: true,
+	"piramide.devices.capabilities.flash"					: true,
+	
+	"piramide.user.capabilities.problems"					: true,
+	"piramide.user.capabilities.problems.sight"				: true,
+	"piramide.user.capabilities.problems.sight.diopters"	: 0,
+	"piramide.user.capabilities.problems.hearing" 			: false,
+	"piramide.user.capabilities.problems.smell"				: false,
+	"piramide.user.capabilities.problems.touch"				: false,
+	"piramide.user.capabilities.problems.problems"			: false
+}

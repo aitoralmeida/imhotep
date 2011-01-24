@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:paddingLeft="15px"
+   >
+	<TableRow>
+		<ImageView
+			android:id="@+id/img_bar_button"
+			android:layout_width="130px"
+			android:layout_height="130px"
+			android:background="@drawable/bar_normal" >
+		</ImageView>
+ 		<ImageView
+			android:id="@+id/img_restaurant_button"
+			android:layout_width="130px"
+			android:layout_height="130px"
+			android:background="@drawable/restaurant_normal" >
+		</ImageView>
+		<ImageView
+			android:id="@+id/img_cafe_button"
+			android:layout_width="130px"
+			android:layout_height="130px"
+			android:background="@drawable/cafe_normal" >
+		</ImageView>
+		<ImageView
+			android:id="@+id/img_hotel_button"
+			android:layout_width="130px"
+			android:layout_height="130px"
+			android:background="@drawable/hotel_normal" >
+		</ImageView>
+    </TableRow>
+    <TableRow>
+    	<ImageView
+			android:id="@+id/img_museums_button"
+			android:layout_width="130px"
+			android:layout_height="130px"
+			android:background="@drawable/museum_normal" >
+		</ImageView>
+ 		<ImageView
+			android:id="@+id/img_gas_button"
+			android:layout_width="130px"
+			android:layout_height="130px"
+			android:background="@drawable/gas_normal" >
+		</ImageView>
+		<ImageView
+			android:id="@+id/img_transport_button"
+			android:layout_width="130px"
+			android:layout_height="130px"
+			android:background="@drawable/taxi_normal" >
+		</ImageView>
+		<ImageView
+			android:id="@+id/img_airport_button"
+			android:layout_width="130px"
+			android:layout_height="130px"
+			android:background="@drawable/airport_normal" >
+		</ImageView>
+		
+    </TableRow>
+</TableLayout>

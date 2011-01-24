@@ -1,0 +1,23 @@
+<project name="AssistedCity" default="generate" basedir=".">
+	
+	<property name="preprocessor.path" value="../Preprocessor"/>
+	
+	<target name="generate">
+	   <java classname="piramide.multimodal.preprocessor.Main">
+	     <arg value="src"/>
+	     <arg value="variables.txt"/>
+	     <arg value=".java"/>
+	     <arg value="generated"/>
+	     <classpath>
+		    <pathelement location="${preprocessor.path}/bin"/>
+	     	<fileset dir="${preprocessor.path}/lib" includes="**.jar"/>
+	     </classpath>
+	   </java>
+	   <delete includeemptydirs="true">
+		   <fileset dir="generated" defaultexcludes="no">
+	     		<include name="**/.svn/" />
+	       </fileset>
+	   </delete>
+	</target>
+	
+</project>
