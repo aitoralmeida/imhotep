@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ApplicationDownloaderActivity!</string>
+    <string name="app_name">PiramideApplicationDownloader</string>
+    
+    <!-- Preferences -->
+    
+    <string name="baseurl_pref_name">baseUrlPref</string>
+    <string name="baseurl_pref_default">http://www.morelab.deusto.es/imhotep/server/</string>
+    <string name="profile_pref">profilePref</string>
+    
+    <!-- Profiles -->
+    
+    <string name="regular_user">regular</string>
+    <string name="blind_user">blind</string>
+</resources>

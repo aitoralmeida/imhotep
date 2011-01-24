@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="profile_names">
+        <item>Regular user</item>
+        <item>Blind user</item>
+    </string-array>
+    <string-array name="profile_values">
+        <item>@string/regular_user</item>
+        <item>@string/blind_user</item>
+    </string-array>
+</resources>
