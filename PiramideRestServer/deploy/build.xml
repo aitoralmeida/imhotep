@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PiramideRestServer" default="deploy">
+	<property name="piramide.directory" value="${user.home}"/>
+
+	<target name="clean">
+		<delete dir="${piramide.directory}/.piramide"/>
+	</target>
+
+	<target name="deploy" depends="clean">
+		<echo message="Don't forget to edit piramide/configuration/local.properties before calling this task!"/>
+		<copy todir="${piramide.directory}/.piramide">
+			<fileset dir="piramide" />
+		</copy>
+	</target>
+</project>
