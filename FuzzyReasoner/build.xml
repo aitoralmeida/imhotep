@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<project name="FuzzyReasoner" default="help">
+	
+	<property name="src.dir" location="src" />
+	<property name="test.dir" location="test" />
+	<property name="classes.dir" location="bin" />
+	<property name="dbmigrator.path" value="piramide.interaction.reasoner.db.deploy.DatabaseMigrator" />
+	<property name="dbcreator.path" value="piramide.interaction.reasoner.db.deploy.InitialDatabaseCreator" />
+	<property name="dump.generator.path" value="piramide.interaction.reasoner.db.deploy.MobileDevicesSerializer" />
+
+	<property name="wurfl.file" location="wurfl-2.0.15.xml" />
+	<property name="piramide.trends.sql.filename" value="PiramideTrendsFull_2010_06_14.sql" />
+	<property name="piramide.trends.initial.sql.filename" value="InitialPiramideTrendsFull.sql" />
+	<property name="piramide.test.trends.sql.filename" value="createTrends.sql" />
+
+	<property file="piramide.properties" />
+	
+	<fail message="Database credentials not available in piramide.properties. See piramide.properties.dist">
+		<condition>
+			<not>
+				<and>
+					<isset property="dbuser"/>
+					<isset property="dbpasswd"/>
+				</and>
+			</not>
+		</condition>
+	</fail>
+	
+
+	<path id="libs">  	
+		<fileset dir="lib">
+			<include name="*.jar" />
+		</fileset>  	
+	</path>
+		
+	<target name="clean">
+		<delete includeemptydirs="true">
+			<fileset dir="${classes.dir}" includes="**/*" />
+		</delete>
+	</target>
+	
+	<target name="compile">
+		<mkdir dir="${classes.dir}"/>
+		<javac debug="true" destdir="${classes.dir}" srcdir="${src.dir}" encoding="utf-8">
+			<classpath>
+				<dirset dir="${classes.dir}"/>
+				<path refid="libs"/>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="jar">
+		<delete file="FuzzyReasoner.jar"/>
+		<jar destfile="FuzzyReasoner.jar" manifest="MANIFEST.MF">
+			<fileset dir="${classes.dir}">
+				<include name="**/*.class"/>
+			</fileset>
+			<fileset dir="lib"/>
+		</jar>
+	</target>
+	
+	<target name="compile-tests" depends="compile">
+		<javac debug="true" destdir="${classes.dir}" srcdir="${test.dir}" encoding="utf-8">
+			<classpath>
+				<dirset dir="${classes.dir}"/>
+				<path refid="libs"/>			
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="test" depends="compile-tests">
+		<junit fork="true" showoutput="true">
+			<classpath>
+				<dirset dir="${classes.dir}"/>
+				<path refid="libs"/>			
+			</classpath>
+			<formatter type="brief" usefile="false" />
+			<batchtest>
+				<fileset dir="${classes.dir}">
+					<include name="**/**Test.class"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+	
+	<target name="deploy-initial-database" depends="compile">
+		<sql driver="com.mysql.jdbc.Driver"
+	    	url="jdbc:mysql://localhost:3306/"
+	    	userid="${dbuser}"
+	    	password="${dbpasswd}"
+	    	src="${piramide.trends.initial.sql.filename}">
+			<classpath>
+				<dirset dir="${classes.dir}"/>
+				<path refid="libs"/>			
+			</classpath>
+		</sql>
+		
+		<java classname="${dbcreator.path}" fork="true">
+			<classpath>
+				<dirset dir="${classes.dir}"/>
+				<path refid="libs"/>		
+			</classpath>
+			<jvmarg value="-Xmx1024m"/>
+			<jvmarg value="-Xms256m"/>				
+			<arg value="${wurfl.file}"/>
+		</java>
+	</target>
+		
+	<target name="deploy-database" depends="compile">
+		
+		<unzip src="${piramide.trends.sql.filename}.zip" dest="."/>
+		
+		<sql driver="com.mysql.jdbc.Driver"
+	    	url="jdbc:mysql://localhost:3306/"
+	    	userid="${dbuser}"
+	    	password="${dbpasswd}"
+	    	src="${piramide.trends.sql.filename}">
+			<classpath>
+				<dirset dir="${classes.dir}"/>
+				<path refid="libs"/>			
+			</classpath>
+		</sql>
+		
+		<sql driver="com.mysql.jdbc.Driver"
+	    	url="jdbc:mysql://localhost:3306/"
+	    	userid="${dbuser}"
+	    	password="${dbpasswd}"
+	    	src="${piramide.test.trends.sql.filename}">
+			<classpath>
+				<dirset dir="${classes.dir}"/>
+				<path refid="libs"/>			
+			</classpath>
+		</sql>
+		
+		<echo>Populating database...</echo>
+		
+		<java classname="${dbmigrator.path}" fork="true">
+			<classpath>
+				<dirset dir="${classes.dir}"/>
+				<path refid="libs"/>		
+			</classpath> 
+			<jvmarg value="-Xmx1024m"/>
+			<jvmarg value="-Xms256m"/>	
+		</java>
+		
+		<echo>done</echo>
+	</target>
+	
+	<target name="generate-dump" depends="deploy-database">
+		<java classname="${dump.generator.path}" fork="true">
+			<classpath>
+				<dirset dir="${classes.dir}"/>
+				<path refid="libs"/>		
+			</classpath> 
+			<jvmarg value="-Xmx1024m"/>
+			<jvmarg value="-Xms256m"/>	
+		</java>
+	</target>
+	
+	<target name="help">
+		<echo>Choose a task:
+			- compile
+			- deploy
+			- test
+			- clean
+		</echo>
+	</target>
+</project>
