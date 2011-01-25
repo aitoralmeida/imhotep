@@ -69,12 +69,6 @@ public class Constants {
 	public static final String POINT 						= "Point";
 	public static final String SELECTED 					= "Ha seleccionado, ";
 	public static final String CURRENT_DISTANCE 			= "Current distance: ";
-	//Deusto coordinates
-	public static final double DEFAULT_LATITUDE 			= 43.270137;
-	public static final double DEFAULT_LONGITUDE 			= -2.9410225;
-	//Madrid coordinates
-	public static final double MADRID_LONGITUDE				= -3.678702;
-	public static final double MADRID_LATITUDE				= 40.467349;
 	//Names for the units to use
 	public static final int KILOMETERS 						= 0;
 	public static final int METERS 							= 3;

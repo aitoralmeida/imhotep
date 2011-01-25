@@ -50,16 +50,14 @@ public class LocationService extends Service {
 
 	public static Categories CATEGORIES_ACTIVITY;
 	public static Directions DIRECTIONS_ACTIVITY;
-	private static volatile String currentLocation;
-	private static volatile double currentLatitude = Constants.DEFAULT_LATITUDE;
-	private static volatile double currentLongitude = Constants.DEFAULT_LONGITUDE;
+	private static volatile String currentLocationString;
+	private static volatile double currentLatitude;
+	private static volatile double currentLongitude;
 	private static volatile float currentAccuracy;
 	private static boolean isEmulator;
-	private static boolean MOCK = true;
-	private static volatile double lastLatitude = Constants.DEFAULT_LATITUDE;
-	private static volatile double lastLongitude = Constants.DEFAULT_LONGITUDE;
-//	private static volatile double lastLatitude = Constants.MADRID_LATITUDE;
-//	private static volatile double lastLongitude = Constants.MADRID_LONGITUDE;
+	private static boolean MOCK = false;
+	private static volatile double lastLatitude;
+	private static volatile double lastLongitude;
 
 	@Override 
 	public void onCreate() {
@@ -134,24 +132,20 @@ public class LocationService extends Service {
 
 	private void updateWithNewLocation(Location location) {
 		String addressString = "No address found";
-		Log.i(Constants.TAG, "-----------------------Updating Location: " + currentLocation);
+		Log.i(Constants.TAG, "-----------------------Updating Location: " + currentLocationString);
 		
 		if (location != null) {
-//			double latitude 		= location.getLatitude();
-//			double longitude 		= location.getLongitude();
-//			double latitude 		= Constants.MADRID_LATITUDE;
-//			double longitude 		= Constants.MADRID_LONGITUDE;
-			double latitude 		= Constants.DEFAULT_LATITUDE;
-			double longitude 		= Constants.DEFAULT_LONGITUDE;
-			currentLatitude         = latitude;
-			currentLongitude        = longitude;
-			currentAccuracy            = location.getAccuracy();
-			currentLocation			= "Lat:" + latitude + Constants.NEXT_LINE + "Long:" + longitude;
+			currentLatitude 	= location.getLatitude();
+			currentLongitude 	= location.getLongitude();
+			Log.i(Constants.TAG, "-----------------------New latitude: " + currentLatitude);
+			Log.i(Constants.TAG, "-----------------------New longitude: " + currentLongitude);
+			currentAccuracy     = location.getAccuracy();
+			currentLocationString = "Lat:" + currentLatitude + Constants.NEXT_LINE + "Long:" + currentLongitude;
 			final Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
 			
 			try {
-				final List<Address> addresses = geoCoder.getFromLocation(latitude,
-						longitude, 1);
+				final List<Address> addresses = geoCoder.getFromLocation(currentLatitude,
+						currentLongitude, 1);
 				StringBuilder stringBuilder = new StringBuilder();
 				if (addresses.size() > 0) {
 					final Address address = addresses.get(0);
@@ -168,19 +162,17 @@ public class LocationService extends Service {
 				Log.e(Constants.TAG, ioe.getMessage());
 			}
 		} else {
-			currentLocation = "No location found";
+			currentLocationString = "No location found";
 		}
 		
 		final Context context = this.getApplicationContext();
-//		currentLocation = "Coordenadas actuales:" + Constants.NEXT_LINE + currentLocation
-//				+ Constants.NEXT_LINE + addressString;
-		currentLocation = addressString;
+		currentLocationString = addressString;
 		
-		if (currentLocation.equals("No location found")) {
+		if (currentLocationString.equals("No location found")) {
 			Toast.makeText(context, "Unnable to determine your location", Constants.SHORT_DURATION).show();
 			Log.i(Constants.TAG, "--------------------No location found...");
 		} 
-		Log.i(Constants.TAG, "--------------------Location Updated: " + currentLocation);
+		Log.i(Constants.TAG, "--------------------Location Updated: " + currentLocationString);
 	}
 
 	@Override 
@@ -193,7 +185,7 @@ public class LocationService extends Service {
 	}
 	
 	public static String getLocation(){
-		return currentLocation;
+		return currentLocationString;
 	}
 	
 	private void setupEmulator(){
