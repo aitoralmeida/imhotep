@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tester>
+	<visual>
+		<fontSize></fontSize>
+		<colours>
+			<combination>
+				<background></background>
+				<foreground></foreground>
+			</combination>
+			<combination>
+				<background></background>
+				<foreground></foreground>
+			</combination>
+		</colours>
+		<locations>
+			<location></location>
+		</locations>
+		<imageText></imageText>
+	</visual>
+	
+	<auditive>
+		<volume></volume>
+	</auditive>
+	
+	<motor>
+		<gestures>
+			<shake></shake>
+			<move></move>
+		</gestures>
+	</motor>
+	
+	<cognitive>
+		<something></something>
+	</cognitive>
+</tester>

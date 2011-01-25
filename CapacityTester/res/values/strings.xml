@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">This program will try to assess you capabilites to adapt the programs to them. Press start to continue.</string>
+    <string name="start">Start</string>
+    <string name="app_name">Capacity tester v2</string>
+    <string name="font_test">Can you read this message?</string>
+    <string name="font_size">fontSize</string>
+    <string name="config_parcel">piramide.multimodal.configuration</string>
+    <string name="view_yes">Yes</string>
+    <string name="view_no">No</string>
+    <string name="visible_font_size">fontSize</string>
+    <string name="blind">blind</string>
+    <string name="next">Next</string>
+    <string name="download_and_install">Download and install</string>
+    <string name="consume_web_service">Consume web service</string>
+    
+</resources>
