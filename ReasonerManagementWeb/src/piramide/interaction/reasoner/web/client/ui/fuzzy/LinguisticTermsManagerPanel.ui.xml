@@ -1,0 +1,22 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:with field="i18n" type="piramide.interaction.reasoner.web.client.ui.common.i18n.IPiramideMessages"/>
+
+		<g:VerticalPanel spacing="5" width="100%">
+			<g:Cell horizontalAlignment="ALIGN_CENTER">
+				<g:Label styleName="header" text="{i18n.variables}"/>
+			</g:Cell>
+			
+			<g:Cell horizontalAlignment="ALIGN_LEFT">
+				<g:Button ui:field="addVariableButton" text="{i18n.add}" />
+			</g:Cell>
+			
+			<g:ScrollPanel height="640px">
+				<g:VerticalPanel ui:field="mainPanel" spacing="5" width="100%" >
+				</g:VerticalPanel>
+			</g:ScrollPanel>
+		</g:VerticalPanel>
+
+</ui:UiBinder> 

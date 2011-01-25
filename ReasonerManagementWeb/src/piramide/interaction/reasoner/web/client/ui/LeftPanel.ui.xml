@@ -1,0 +1,39 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:p="urn:import:piramide.interaction.reasoner.web.client.ui.common.widgets"
+	>
+	
+	<ui:with field="i18n" type="piramide.interaction.reasoner.web.client.ui.common.i18n.IPiramideMessages"/>
+	
+	<g:VerticalPanel>
+	
+		<p:PiramideStackPanel>
+		
+			<g:Label text="{i18n.fuzzyConfiguration}"/>
+			<g:VerticalPanel>
+				<g:Anchor ui:field="loadFuzzyConfigurationAnchor" text="{i18n.loadConfiguration}"/>
+				<g:Anchor ui:field="enterLinguisticTermsAnchor" text="{i18n.enterLinguisticTerms}"/>
+				<g:Anchor ui:field="enterRulesAnchor" text="{i18n.enterRules}"/>
+			</g:VerticalPanel>
+			
+			<g:Label text="{i18n.profileConfiguration}"/>
+			<g:VerticalPanel>
+				<g:Anchor ui:field="loadProfileConfigurationAnchor" text="{i18n.loadConfiguration}"/>
+				<g:Anchor ui:field="manageUserProfileAnchor" text="{i18n.manageUserProfile}"/>
+				<g:Anchor ui:field="findDeviceAnchor" text="{i18n.findDeviceID}"/>
+				<g:Anchor ui:field="selectLocationAnchor" text="{i18n.selectLocation}"/>
+				<g:Anchor ui:field="testProfileAnchor" text="{i18n.testProfile}"/>
+			</g:VerticalPanel>
+			
+			<g:Label text="{i18n.updateDatabase}"/>
+			<g:Label text="{i18n.uploadFile}"/>
+			
+			<g:Label text="{i18n.help}"/>
+			<g:Anchor ui:field="showHelpAnchor" text="{i18n.help}"/>
+			
+		</p:PiramideStackPanel>
+		
+	</g:VerticalPanel>
+	
+</ui:UiBinder> 

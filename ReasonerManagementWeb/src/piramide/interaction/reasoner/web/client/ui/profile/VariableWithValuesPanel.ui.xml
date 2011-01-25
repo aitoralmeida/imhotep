@@ -1,0 +1,37 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	
+	<ui:with field="i18n" type="piramide.interaction.reasoner.web.client.ui.common.i18n.IPiramideMessages"/>
+
+	<g:DecoratorPanel>
+	<g:VerticalPanel>
+	
+		<g:Cell horizontalAlignment="ALIGN_CENTER">
+			<g:Label ui:field="variableNameLabel" styleName="header"/>
+		</g:Cell>
+	
+		<g:HorizontalPanel spacing="10">
+		
+			<g:Cell width="50%">
+				<g:Image ui:field="variableImage"/>
+			</g:Cell>
+		
+			<g:Cell width="50%" verticalAlignment="ALIGN_MIDDLE">
+				<g:VerticalPanel spacing="10">
+					<g:HorizontalPanel spacing="2">
+						<g:Label styleName="important" text="{i18n.value}: "/>
+						<g:Label ui:field="currentValueLabel"/>
+					</g:HorizontalPanel>
+					
+					<g:VerticalPanel ui:field="termsPanel" spacing="5">
+					</g:VerticalPanel>
+				</g:VerticalPanel>
+			</g:Cell>
+		
+		</g:HorizontalPanel>
+	
+	</g:VerticalPanel>
+	</g:DecoratorPanel>
+
+</ui:UiBinder> 

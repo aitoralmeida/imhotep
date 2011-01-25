@@ -1,0 +1,111 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:with field="i18n" type="piramide.interaction.reasoner.web.client.ui.common.i18n.IPiramideMessages"/>
+
+	<g:VerticalPanel width="100%" spacing="10">
+		
+		<g:VerticalPanel width="100%">
+			<g:HorizontalPanel width="100%" spacing="10">
+				<g:Cell width="50%">
+					<g:DecoratorPanel>
+						<g:VerticalPanel spacing="5">
+						
+							<g:Cell horizontalAlignment="ALIGN_CENTER">
+								<g:Label ui:field="noInputVariableDefinedLabel" text="{i18n.noInputVariableDefined}" styleName="error"/>
+							</g:Cell>
+							
+							<g:VerticalPanel ui:field="inputVariablePanel" spacing="10">
+								<g:Cell width="100%">
+									<g:HorizontalPanel>
+										<g:Cell width="40%" verticalAlignment="ALIGN_MIDDLE">
+											<g:Label text="{i18n.inputVariables}"/>
+										</g:Cell>
+										<g:Cell width="40%" verticalAlignment="ALIGN_MIDDLE">
+											<g:ListBox ui:field="inputVariablesListbox"></g:ListBox>
+										</g:Cell>
+										<g:Cell width="20%">
+											<g:Label text=""/>
+										</g:Cell>
+									</g:HorizontalPanel>
+								</g:Cell>
+								<g:Cell width="100%">
+									<g:HorizontalPanel>
+										<g:Cell width="40%" verticalAlignment="ALIGN_MIDDLE">
+											<g:Label text="{i18n.variableTerms}"/>
+										</g:Cell>
+										<g:Cell width="40%" verticalAlignment="ALIGN_MIDDLE">
+											<g:ListBox ui:field="inputVariableTermsListbox"></g:ListBox>
+										</g:Cell>
+										<g:Cell width="20%" verticalAlignment="ALIGN_MIDDLE">
+											<g:Button ui:field="inputVariableAdd" text="{i18n.add}"/>
+										</g:Cell>
+									</g:HorizontalPanel>
+								</g:Cell>
+							</g:VerticalPanel>
+						</g:VerticalPanel>
+					</g:DecoratorPanel>
+				</g:Cell>
+			
+				<g:Cell width="50%">
+					<g:DecoratorPanel>
+						<g:VerticalPanel spacing="5">
+							<g:Cell horizontalAlignment="ALIGN_CENTER">
+								<g:Label ui:field="noOutputVariableDefinedLabel" text="{i18n.noOutputVariableDefined}" styleName="error" />
+							</g:Cell>
+							<g:VerticalPanel ui:field="outputVariablePanel" width="100%" spacing="10">
+								<g:Cell width="100%">
+									<g:HorizontalPanel>
+										<g:Cell width="40%" verticalAlignment="ALIGN_MIDDLE">
+											<g:Label text="{i18n.outputVariables}"/>
+										</g:Cell>
+										<g:Cell width="40%" verticalAlignment="ALIGN_MIDDLE">
+											<g:ListBox ui:field="outputVariablesListbox"></g:ListBox>
+										</g:Cell>
+										<g:Cell width="20%">
+											<g:Label text=""/>
+										</g:Cell>
+									</g:HorizontalPanel>
+								</g:Cell>
+								<g:Cell width="100%">
+									<g:HorizontalPanel>
+										<g:Cell width="40%" verticalAlignment="ALIGN_MIDDLE">
+											<g:Label text="{i18n.variableTerms}"/>
+										</g:Cell>
+										<g:Cell width="40%" verticalAlignment="ALIGN_MIDDLE">
+											<g:ListBox  ui:field="outputVariableTermsListbox"></g:ListBox>
+										</g:Cell>
+										<g:Cell width="20%" verticalAlignment="ALIGN_MIDDLE">
+											<g:Button ui:field="outputVariableAdd" text="{i18n.add}"/>
+										</g:Cell>
+									</g:HorizontalPanel>
+								</g:Cell>
+							</g:VerticalPanel>
+						</g:VerticalPanel>
+					</g:DecoratorPanel>
+				</g:Cell>
+			</g:HorizontalPanel>
+		
+			<g:DecoratorPanel>
+				<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_CENTER" spacing="5">
+					<g:Button ui:field="newRuleButton"  text="{i18n.newRule}" />
+					<g:Button ui:field="andButton"      text="AND" />
+					<g:Button ui:field="orButton"       text="OR" />
+					<g:Button ui:field="thenButton"     text="THEN" />
+					<g:Button ui:field="endRuleButton"  text="{i18n.endRule}" />
+				</g:HorizontalPanel>
+			</g:DecoratorPanel>
+		
+		</g:VerticalPanel>
+		
+		<g:TextArea ui:field="rulesTextArea" visibleLines="20" width="100%">
+		</g:TextArea>
+		
+		<g:HorizontalPanel>
+			<g:Button ui:field="saveButton" text="{i18n.save}"/>
+		</g:HorizontalPanel>
+		
+	</g:VerticalPanel>
+
+</ui:UiBinder> 

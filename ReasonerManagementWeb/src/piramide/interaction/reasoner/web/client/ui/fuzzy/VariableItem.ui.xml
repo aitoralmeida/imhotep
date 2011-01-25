@@ -1,0 +1,54 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" 
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	
+	<ui:with field="i18n" type="piramide.interaction.reasoner.web.client.ui.common.i18n.IPiramideMessages"/>
+	
+	<g:DecoratorPanel width="100%" >
+		<g:VerticalPanel width="100%" spacing="10">
+		
+			<g:HorizontalPanel width="100%">
+				<g:Cell width="50%" horizontalAlignment="ALIGN_LEFT">
+					<g:HorizontalPanel>
+						<g:Label text="{i18n.name}:&nbsp;" styleName="important"/>
+						<g:Label ui:field="nameLabel"  text="reso_width"/>
+					</g:HorizontalPanel>
+				</g:Cell>
+				
+				<g:Cell width="50%" horizontalAlignment="ALIGN_LEFT">
+					<g:HorizontalPanel>
+						<g:Label text="{i18n.type}:&nbsp;" styleName="important"/>
+						<g:Label ui:field="typeLabel"  text="Input"/>
+					</g:HorizontalPanel>
+				</g:Cell>
+				
+			</g:HorizontalPanel>
+
+			<g:HorizontalPanel width="100%">
+				<g:Cell width="50%" horizontalAlignment="ALIGN_LEFT">
+					<g:HorizontalPanel ui:field="userOrDevicePanel">
+						<g:Label text="{i18n.userOrDevice}:&nbsp;" styleName="important"/>
+						<g:Label ui:field="userDeviceTypeLabel"  text="device"/>
+					</g:HorizontalPanel>
+				</g:Cell>
+				
+			</g:HorizontalPanel>			
+			
+			<g:Cell horizontalAlignment="ALIGN_RIGHT">
+				<g:HorizontalPanel width="50%">
+					<g:Cell horizontalAlignment="ALIGN_RIGHT">
+						<g:Button ui:field="viewButton" text="{i18n.view}"/>
+					</g:Cell>
+					
+					<g:Cell horizontalAlignment="ALIGN_RIGHT">
+						<g:Button ui:field="editButton" text="{i18n.edit}"/>
+					</g:Cell>
+					<g:Cell horizontalAlignment="ALIGN_RIGHT">
+						<g:Button ui:field="deleteButton" text="{i18n.delete}"/>
+					</g:Cell>
+				</g:HorizontalPanel>
+			</g:Cell>
+		</g:VerticalPanel>
+	</g:DecoratorPanel>
+	
+</ui:UiBinder> 

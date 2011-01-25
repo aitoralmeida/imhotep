@@ -1,0 +1,25 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	
+	<ui:with field="i18n" type="piramide.interaction.reasoner.web.client.ui.common.i18n.IPiramideMessages"/>
+	
+	<g:VerticalPanel>
+		<g:Label styleName="header" text="{i18n.help}"/>
+		
+		<g:VerticalPanel spacing="5">
+			<g:HorizontalPanel>
+				<g:CheckBox/>
+				<g:Label text="{i18n.step1}"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel>
+				<g:CheckBox/>
+				<g:Label text="{i18n.step2}"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel>
+				<g:CheckBox/>
+				<g:Label text="{i18n.step3}"/>
+			</g:HorizontalPanel>
+		</g:VerticalPanel>
+	</g:VerticalPanel>
+</ui:UiBinder> 

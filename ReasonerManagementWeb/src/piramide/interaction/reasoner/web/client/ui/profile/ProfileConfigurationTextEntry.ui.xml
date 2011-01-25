@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	
+	<ui:with field="i18n" type="piramide.interaction.reasoner.web.client.ui.common.i18n.IPiramideMessages"/>
+	
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	
+	<g:VerticalPanel ui:field="mainPanel" horizontalAlignment="ALIGN_CENTER" width="100%">
+		<g:Label styleName="{style.important}" text="{i18n.pasteConfigurationFile}"  horizontalAlignment="ALIGN_CENTER"/>
+		<g:TextArea ui:field="profileConfigurationText" visibleLines="20" width="100%">
+			Paste your profile configuration here...
+		</g:TextArea>
+		<g:Button ui:field="loadButton" text="{i18n.load}"/>
+	</g:VerticalPanel>
+</ui:UiBinder> 

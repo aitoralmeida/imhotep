@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<project name="ReasonerManagementWeb">
+	<target name="war">
+		<copy file="../FuzzyReasoner/FuzzyReasoner.jar" todir="war/WEB-INF/lib/"/>
+		<zip basedir="war/WEB-INF/classes" destfile="war/WEB-INF/lib/ReasonerManagementWeb.jar" />
+		<war basedir="war" destfile="ReasonerManagementWeb.war" webxml="war/WEB-INF/web.xml">
+			<exclude name="WEB-INF/**" />
+			<webinf dir="war/WEB-INF/">
+				<include name="**/*.jar" />
+			</webinf>
+		</war>
+	</target>
+</project>

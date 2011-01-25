@@ -1,0 +1,77 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	
+	<ui:with field="i18n" type="piramide.interaction.reasoner.web.client.ui.common.i18n.IPiramideMessages"/>
+	
+	<g:VerticalPanel width="100%" spacing="10">
+	
+		<g:HorizontalPanel width="100%" spacing="10">
+			<g:Cell width="33%" horizontalAlignment="ALIGN_LEFT">
+				<g:HorizontalPanel>
+					<g:Cell width="50%">
+						<g:Label text="{i18n.name}:&nbsp;" styleName="important"/>
+					</g:Cell>
+					
+					<g:Cell width="50%">
+						<g:HorizontalPanel>
+							<g:ListBox ui:field="deviceNameListBox" visible="true"/>
+							<g:ListBox ui:field="userNameListBox" visible="false"/>
+							<g:TextBox ui:field="nameTextBox" visible="false" visibleLength="5"/>
+						</g:HorizontalPanel>
+					</g:Cell>
+				</g:HorizontalPanel>
+			</g:Cell>
+			
+			<g:Cell width="33%" horizontalAlignment="ALIGN_LEFT">
+				<g:HorizontalPanel>
+					<g:Label text="{i18n.type}:&nbsp;" styleName="important"/>
+					<g:ListBox ui:field="inputOutputBox"/>
+				</g:HorizontalPanel>
+			</g:Cell>
+			
+			<g:Cell width="33%" horizontalAlignment="ALIGN_LEFT">
+				<g:HorizontalPanel ui:field="inputSelectionPanel">
+					<g:Label text="{i18n.input} {i18n.type}:&nbsp;" styleName="important"/>
+					<g:ListBox ui:field="deviceUserBox"/>
+				</g:HorizontalPanel>
+			</g:Cell>
+		</g:HorizontalPanel>
+		
+		<g:Cell>
+			<g:DecoratorPanel>
+				<g:HorizontalPanel width="100%" spacing="10">
+					<g:Cell width="70%" horizontalAlignment="ALIGN_CENTER">
+						<g:VerticalPanel>
+							<g:Label text="{i18n.linguisticTerms}" styleName="important"/>
+							<g:ListBox ui:field="linguisticTermsListBox" multipleSelect="true" width="14em" visibleItemCount="10">
+							</g:ListBox>
+						</g:VerticalPanel>
+					</g:Cell>
+					<g:Cell width="30%" horizontalAlignment="ALIGN_CENTER" verticalAlignment="ALIGN_MIDDLE">
+						<g:VerticalPanel>
+							<g:Cell horizontalAlignment="ALIGN_CENTER">
+								<g:Button ui:field="addLinguisticTermButton" text="{i18n.add}"/>
+							</g:Cell>
+							<g:Cell horizontalAlignment="ALIGN_CENTER">
+								<g:Button ui:field="removeLinguisticTermButton" text="{i18n.remove}"/>
+							</g:Cell>
+						</g:VerticalPanel>	
+					</g:Cell>
+				</g:HorizontalPanel>
+			</g:DecoratorPanel>
+		</g:Cell>
+		
+		<g:Cell horizontalAlignment="ALIGN_RIGHT">
+			<g:HorizontalPanel width="50%">
+				<g:Cell horizontalAlignment="ALIGN_RIGHT">
+					<g:Button ui:field="saveButton" text="{i18n.save}"/>
+				</g:Cell>
+				<g:Cell horizontalAlignment="ALIGN_RIGHT">
+					<g:Button ui:field="cancelButton" text="{i18n.cancel}"/>
+				</g:Cell>
+			</g:HorizontalPanel>
+		</g:Cell>
+	</g:VerticalPanel>
+	
+</ui:UiBinder> 

@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	
+	<ui:with field="i18n" type="piramide.interaction.reasoner.web.client.ui.common.i18n.IPiramideMessages"/>
+
+	<g:HorizontalPanel>
+		<g:Cell verticalAlignment="ALIGN_MIDDLE">
+			<g:Label text="{i18n.selectLocation}:" styleName="important"/>
+		</g:Cell>
+		<g:Cell verticalAlignment="ALIGN_MIDDLE">
+			<g:ListBox ui:field="geoListBox"/>
+		</g:Cell>
+		<g:Cell verticalAlignment="ALIGN_MIDDLE">
+			<g:Button ui:field="saveButton" text="{i18n.save}"/>
+		</g:Cell>
+	</g:HorizontalPanel>
+
+</ui:UiBinder> 

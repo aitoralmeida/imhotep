@@ -1,0 +1,40 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:with field="i18n" type="piramide.interaction.reasoner.web.client.ui.common.i18n.IPiramideMessages"/>
+	
+	<g:VerticalPanel spacing="10">
+		<g:Cell horizontalAlignment="ALIGN_CENTER">
+			<g:Label styleName="important" text="{i18n.profileConfiguration}"></g:Label>
+		</g:Cell>
+		
+		<g:DecoratorPanel>
+			<g:VerticalPanel spacing="10">
+				<g:FlexTable ui:field="profileTable" width="100%">
+					
+				</g:FlexTable>
+				
+				<g:HorizontalPanel ui:field="addCapabilityPanel" width="100%" spacing="10">
+					<g:Cell verticalAlignment="ALIGN_MIDDLE">
+						<g:Label text="{i18n.capability}:" styleName="important" />
+					</g:Cell>
+					<g:Cell verticalAlignment="ALIGN_MIDDLE">
+						<g:ListBox ui:field="capabilityNameListBox"/>
+					</g:Cell>
+					<g:Cell verticalAlignment="ALIGN_MIDDLE">
+						<g:Label text="{i18n.value}"  styleName="important"/>
+					</g:Cell>
+					<g:Cell verticalAlignment="ALIGN_MIDDLE">
+						<g:TextBox ui:field="valueTextbox"/>
+					</g:Cell>
+					<g:Cell verticalAlignment="ALIGN_MIDDLE">
+						<g:Button ui:field="addButton" text="{i18n.add}"/>
+					</g:Cell>
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+		</g:DecoratorPanel>
+		
+	</g:VerticalPanel>
+
+</ui:UiBinder> 

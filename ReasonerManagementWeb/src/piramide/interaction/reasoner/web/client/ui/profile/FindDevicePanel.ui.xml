@@ -1,0 +1,44 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<ui:with field="i18n" type="piramide.interaction.reasoner.web.client.ui.common.i18n.IPiramideMessages"/>
+
+	<g:VerticalPanel width="100%" horizontalAlignment="ALIGN_CENTER">
+		<g:HorizontalPanel>
+			<g:cell verticalAlignment="ALIGN_MIDDLE" width="50%">
+				<g:Label styleName="findtitle" text="{i18n.typeMobileDevice}:"/>
+			</g:cell>
+			<g:VerticalPanel ui:field="suggestBoxPanel"  width="50%"/>
+		</g:HorizontalPanel>
+		
+		<g:VerticalPanel width="100%"  visible="false" ui:field="mobileDisplayPanel" spacing="10">
+		
+			<g:HorizontalPanel width="100%">
+				<g:Label text="{i18n.displayName}:" styleName="important" width="50%"/>
+				<g:Label ui:field="displayNameLabel" width="50%"/>
+			</g:HorizontalPanel>
+			
+			<g:HorizontalPanel width="100%">
+				<g:HorizontalPanel  width="50%">
+					<g:Label text="{i18n.totalTrends}:"  styleName="important"/>
+					<g:Label ui:field="totalTrendsLabel" />
+				</g:HorizontalPanel>
+				
+				<g:HorizontalPanel  width="50%">
+					<g:Label text="{i18n.decayedTrends}:"  styleName="important"/>
+					<g:Label ui:field="decayedTrendsLabel" />
+				</g:HorizontalPanel>
+			</g:HorizontalPanel>
+			
+			<g:FlexTable ui:field="table" width="32em" cellSpacing="5" cellPadding="3">
+			</g:FlexTable>
+			
+			<g:cell horizontalAlignment="ALIGN_CENTER">
+				<g:Button ui:field="saveButton" text="{i18n.save}"/>
+			</g:cell>
+			
+		</g:VerticalPanel>
+	</g:VerticalPanel>
+
+</ui:UiBinder> 
