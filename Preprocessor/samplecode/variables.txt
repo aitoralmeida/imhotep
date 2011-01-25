@@ -1,0 +1,7 @@
+{
+	"piramide.devices.height"       : 500,
+	"piramide.devices.width"        : 500,
+	"piramide.user.visual.diopters" : 20, 
+	"piramide.devices.modelname"    : "HTC Magic",
+	"piramide.devices.video"		: true
+}
