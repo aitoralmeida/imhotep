@@ -89,7 +89,7 @@ class Universe {
 		int previousBoundary = 0;
 		for (int i = 0; i < this.individuals.length; i++) {
 			accumulatedTrend += this.individuals[i].getTrend();
-			while(accumulatedTrend >= (regionNumber * targetTrend)){
+			while(greaterThan(accumulatedTrend, regionNumber * targetTrend, 0.0000001)){
 				this.regions[regionNumber - 1] = new Region(new Boundary(previousBoundary), new Boundary(i), this, regionNumber - 1);
 				if(accumulatedTrend == (regionNumber * targetTrend)){
 					previousBoundary = i + 1;
@@ -99,6 +99,10 @@ class Universe {
 				regionNumber++;
 			}			
 		}
+	}
+	
+	private boolean greaterThan(double original, double compared, double delta){
+		return original >= (compared - delta);
 	}
 
 	Individual[] getIndividuals() {
