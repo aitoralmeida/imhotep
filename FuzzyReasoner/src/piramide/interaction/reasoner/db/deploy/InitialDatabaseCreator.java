@@ -231,6 +231,8 @@ public class InitialDatabaseCreator {
 	                brandName = "Sharp";
 	            else if(device.getAttribute("id").indexOf("htc") == 0)
 	                brandName = "HTC";
+	            else if(device.getAttribute("id").indexOf("blackberry") == 0)
+	                brandName = "Blackberry";
 	            else if(device.getAttribute("id").indexOf("hp") == 0)
 	                brandName = "HP";
 	            else if(device.getAttribute("id").indexOf("o2") == 0)
@@ -265,6 +267,8 @@ public class InitialDatabaseCreator {
 	                brandName = "Gradiente";
 	            else if(device.getAttribute("id").indexOf("rim950_") == 0)
 	                brandName = "RIM";
+	            else if(device.getAttribute("id").indexOf("rim_") == 0)
+	                brandName = "RIM";
 	            else if(device.getAttribute("id").indexOf("rim957_") == 0)
 	                brandName = "RIM";
 	            else if(device.getAttribute("id").indexOf("skyzen_") == 0)
@@ -285,6 +289,8 @@ public class InitialDatabaseCreator {
 	                brandName = "Pantech";
 	            else if(device.getAttribute("id").indexOf("pg_") == 0)
 	                brandName = "Pantech";
+	            else if(device.getAttribute("id").indexOf("kgt_") == 0)
+	                brandName = "DoCoMo";
 	            else if(device.getAttribute("id").indexOf("pantech_") == 0)
 	                brandName = "Pantech";
 	            else if(device.getAttribute("id").indexOf("panasonic_") == 0)
@@ -297,6 +303,10 @@ public class InitialDatabaseCreator {
 	                brandName = "Sprint";
 	            else if(device.getAttribute("id").indexOf("zte_") == 0)
 	                brandName = "ZTE";
+	            else if(device.getAttribute("id").indexOf("amc_") == 0)
+	                brandName = "ZTE";
+	            else if(device.getAttribute("id").indexOf("beeline_") == 0)
+	                brandName = "Beeline";
 	            else if(device.getAttribute("id").indexOf("motorola_") == 0)
 	                brandName = "Motorola";
 	            else if(device.getAttribute("id").indexOf("qtek_") == 0)
@@ -307,6 +317,8 @@ public class InitialDatabaseCreator {
 	                brandName = "Vertu";
 	            else if(device.getAttribute("id").indexOf("onda_") == 0)
 	                brandName = "Onda";
+	            else if(device.getAttribute("id").indexOf("inq_") == 0)
+	                brandName = "InQ";
 	            else if(device.getAttribute("id").indexOf("sony_") == 0)
 	                brandName = "Sony Ericsson";
 	            else if(device.getAttribute("id").indexOf("nokia_") == 0)
@@ -323,9 +335,15 @@ public class InitialDatabaseCreator {
 	                brandName = "Sendo";
 	            else if(device.getAttribute("id").indexOf("opwv_sdk_ver1_sub7023119") == 0)
 	                brandName = "Openwave";
+	            else if(device.getAttribute("id").indexOf("amazon_") == 0)
+	                brandName = "Amazon";
 	            else if(device.getAttribute("id").indexOf("upg1_ver_1_subblazer43do50") == 0)
 	                continue;
 	            else if(device.getAttribute("id").indexOf("netfront_") == 0)
+	                continue;
+	            else if(device.getAttribute("id").indexOf("elson_") == 0)
+	                continue;
+	            else if(device.getAttribute("id").indexOf("generic_") == 0)
 	                continue;
 	            else if(device.getAttribute("id").indexOf("opera_nokia_") == 0)
 	                continue;

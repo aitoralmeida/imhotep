@@ -8,7 +8,7 @@
 	<property name="dbcreator.path" value="piramide.interaction.reasoner.db.deploy.InitialDatabaseCreator" />
 	<property name="dump.generator.path" value="piramide.interaction.reasoner.db.deploy.MobileDevicesSerializer" />
 
-	<property name="wurfl.file" location="wurfl-2.0.15.xml" />
+	<property name="wurfl.file" location="wurfl-2.0.30.xml" />
 	<property name="piramide.trends.sql.filename" value="PiramideTrendsFull_2010_06_14.sql" />
 	<property name="piramide.trends.initial.sql.filename" value="InitialPiramideTrendsFull.sql" />
 	<property name="piramide.test.trends.sql.filename" value="createTrends.sql" />
