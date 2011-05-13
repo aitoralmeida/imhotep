@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sourceforge.jFuzzyLogic.FIS;
+import piramide.interaction.reasoner.RegionDistributionInfo;
 import piramide.interaction.reasoner.creator.membershipgenerator.IMembershipFunctionGenerator;
 import piramide.interaction.reasoner.creator.membershipgenerator.MembershipFunctionGeneratorFactory;
 import piramide.interaction.reasoner.creator.membershipgenerator.MembershipFunctionGeneratorFactory.Generators;
@@ -87,7 +88,7 @@ public class FclCreator {
     		final Map<Number, Double> value2trend = mobileDevices.getValue2trend(DeviceCapability.valueOf(inputVarName));
     		final MembershipFunctionGeneratorFactory factory = new MembershipFunctionGeneratorFactory();
     		final IMembershipFunctionGenerator mfg = factory.create(value2trend, GENERATOR, warningStore);
-    		final String[] linguisticTerms = (String[])variable.getTerms().toArray();
+    		final RegionDistributionInfo[] linguisticTerms = (RegionDistributionInfo[])variable.getTerms().toArray();
     		for(LinguisticTermMembershipFunction func : mfg.createFunctions(linguisticTerms)){
     			fclCode.append(func.toString());
     			fclCode.append("\n");
@@ -245,10 +246,10 @@ public class FclCreator {
 		return fis;
 	}
 	
-	private String createOutputTerms(List<String> terms){
+	private String createOutputTerms(List<RegionDistributionInfo> terms){
 		final StringBuilder outputTerms = new StringBuilder();
 		for (int i = 0; i < terms.size(); i++) {
-			outputTerms.append("\tTERM " + terms.get(i) + "  := ");
+			outputTerms.append("\tTERM " + terms.get(i).getName() + "  := ");
 			if (i==0){
 				outputTerms.append("(0, 1) (1, 0);\n");
 			} else if (i == terms.size() - 1){
@@ -260,7 +261,7 @@ public class FclCreator {
 		return outputTerms.toString();
 	}
 	
-	private String createUserInputTerms(UserCapability capability, List<String> terms){
+	private String createUserInputTerms(UserCapability capability, List<RegionDistributionInfo> terms){
 		final Value value = UserCapabilities.get(capability);
 		
 		final double distance = value.getUpperBoundary() - value.getLowerBoundary();
@@ -270,7 +271,7 @@ public class FclCreator {
 		
 		final StringBuilder outputTerms = new StringBuilder();
 		for (int i = 0; i < terms.size(); i++) {
-			outputTerms.append("\tTERM " + terms.get(i) + "  := ");
+			outputTerms.append("\tTERM " + terms.get(i).getName() + "  := ");
 			
 			if(i != 0){
 				// Only ascending

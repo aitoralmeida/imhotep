@@ -26,14 +26,24 @@ package piramide.interaction.reasoner.creator.membershipgenerator.iterativeregio
 import java.util.Arrays;
 import java.util.Map;
 
+import piramide.interaction.reasoner.RegionDistributionInfo;
+
 class Universe {
 	private final Individual [] individuals;
 	private final int linguisticTermNumber;
 	private final Region [] regions;
 	private final double sumOfTrends;
-	private static final int LIMIT = 30; 
-	
+	private static final int LIMIT = 30;
+	private final RegionDistributionInfo [] linguisticTerms;
+
+	@Deprecated
 	Universe(Map<Number, Double> values2trends, String ... linguisticTerms){
+		this(values2trends, regionDistribution2string(linguisticTerms));
+	}
+	
+	Universe(Map<Number, Double> values2trends, RegionDistributionInfo ... linguisticTerms){
+		
+		this.linguisticTerms = linguisticTerms;
 		
 		if(linguisticTerms.length > LIMIT)
 			throw new IllegalArgumentException("Too many linguistic terms! Maximum: " + LIMIT);
@@ -64,17 +74,17 @@ class Universe {
 		
 		this.initializeToLeft();
 	}
-	
-	
-	private Universe(Individual [] individuals, int linguisticTermNumber, Region [] regions, double sumOfTrends){
+		
+	private Universe(Individual [] individuals, int linguisticTermNumber, Region [] regions, double sumOfTrends, RegionDistributionInfo [] linguisticTerms){
 		this.individuals          = individuals;
 		this.linguisticTermNumber = linguisticTermNumber;
 		this.regions              = regions;
 		this.sumOfTrends		  = sumOfTrends;
+		this.linguisticTerms = linguisticTerms;
 	}
 	
-	private double getIdealTrendForRegion(){
-		return this.sumOfTrends / this.regions.length;
+	private double getIdealTrendForRegion(int regionNumber){
+		return this.sumOfTrends * this.linguisticTerms[regionNumber].getProportion();
 	}
 	
 	double getSumOfTrends() {
@@ -82,12 +92,12 @@ class Universe {
 	}
 	
 	private void initializeToLeft(){
-		final double targetTrend = getIdealTrendForRegion();
 		
 		double accumulatedTrend = 0.0;
 		int regionNumber = 1;
 		int previousBoundary = 0;
 		for (int i = 0; i < this.individuals.length; i++) {
+			final double targetTrend = getIdealTrendForRegion(i);
 			accumulatedTrend += this.individuals[i].getTrend();
 			while(greaterThan(accumulatedTrend, regionNumber * targetTrend, 0.0000001)){
 				this.regions[regionNumber - 1] = new Region(new Boundary(previousBoundary), new Boundary(i), this, regionNumber - 1);
@@ -133,7 +143,7 @@ class Universe {
 			newIndividuals[i] = this.individuals[i].copy();
 		
 		final Region [] newRegions = new Region[this.regions.length];
-		final Universe newUniverse = new Universe(newIndividuals, this.linguisticTermNumber, newRegions, this.sumOfTrends);
+		final Universe newUniverse = new Universe(newIndividuals, this.linguisticTermNumber, newRegions, this.sumOfTrends, this.linguisticTerms);
 		
 		for(int i = 0; i < newRegions.length; ++i)
 			newRegions[i] = this.regions[i].copy(newUniverse);
@@ -207,9 +217,9 @@ class Universe {
 	private double heuristicClosestToMean() {
 		double heuristic = 0.0;
 		
-		final double idealTrend = getIdealTrendForRegion();
-		
-		for(Region region : this.regions){
+		for(int i = 0; i < this.regions.length; ++i){
+			final Region region = this.regions[i];
+			final double idealTrend = getIdealTrendForRegion(i);
 			final double regionTrend = region.getTrendSum();
 			heuristic += Math.abs(regionTrend - idealTrend);
 		}
@@ -240,5 +250,13 @@ class Universe {
 		}
 		
 		return false;
+	}
+	
+	private static RegionDistributionInfo [] regionDistribution2string(String ... linguisticTerms){
+		final RegionDistributionInfo [] returnValue = new RegionDistributionInfo[linguisticTerms.length];
+		final double proportion = 1.0 / linguisticTerms.length;
+		for(int i = 0; i < linguisticTerms.length; ++i)
+			returnValue[i] = new RegionDistributionInfo(linguisticTerms[i], proportion);
+		return returnValue;
 	}
 }

@@ -36,6 +36,7 @@ import java.awt.Rectangle;
 import javax.swing.JList;
 import javax.swing.JButton;
 
+import piramide.interaction.reasoner.RegionDistributionInfo;
 import piramide.interaction.reasoner.wizard.Variable;
 
 import java.awt.Point;
@@ -189,10 +190,15 @@ public class FCreateNewVariable extends JFrame implements ActionListener{
 			System.out.println(""+ selectedIndex);
 		} else if(e.getSource().equals(this.bAddVariable)){
 			final String variableName = this.tfVarName.getText();
-			final Vector<String> variableTerms = new Vector<String>();
+			final Vector<String> variableTermNames = new Vector<String>();
 			for (int i = 0; i < this.terms.getSize(); i++) {
-				variableTerms.add((String)this.terms.get(i));				
+				variableTermNames.add((String)this.terms.get(i));				
 			}
+			final Vector<RegionDistributionInfo> variableTerms = new Vector<RegionDistributionInfo>();
+			for(String variableTermName : variableTermNames){
+				variableTerms.add(new RegionDistributionInfo(variableTermName, 1.0 / variableTermNames.size()));
+			}
+			
 			final Variable variable = new Variable(variableName, variableTerms);
 			this.parent.addVariable(variable);
 			this.dispose();

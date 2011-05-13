@@ -23,23 +23,23 @@
  */
 package piramide.interaction.reasoner.wizard;
 
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
+
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JFrame;
-import java.awt.Dimension;
 import javax.swing.JTextField;
 
-import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.Rectangle;
-import javax.swing.JList;
-import javax.swing.JButton;
-
-import piramide.interaction.reasoner.wizard.Variable;
-
-import java.awt.Point;
-import java.util.Vector;
+import piramide.interaction.reasoner.RegionDistributionInfo;
 
 public class FCreateNewVariable extends JFrame implements ActionListener{
 
@@ -189,10 +189,15 @@ public class FCreateNewVariable extends JFrame implements ActionListener{
 			System.out.println(""+ selectedIndex);
 		} else if(e.getSource().equals(this.bAddVariable)){
 			final String variableName = this.tfVarName.getText();
-			final Vector<String> variableTerms = new Vector<String>();
+			final Vector<String> variableTermNames = new Vector<String>();
 			for (int i = 0; i < this.terms.getSize(); i++) {
-				variableTerms.add((String)this.terms.get(i));				
+				variableTermNames.add((String)this.terms.get(i));				
 			}
+			
+			final List<RegionDistributionInfo> variableTerms = new Vector<RegionDistributionInfo>();
+			for(String variableTermName : variableTermNames)
+				variableTerms.add(new RegionDistributionInfo(variableTermName, 1.0 / variableTermNames.size()));
+			
 			final Variable variable = new Variable(variableName, variableTerms);
 			this.parent.addVariable(variable);
 			this.dispose();

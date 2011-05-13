@@ -23,13 +23,15 @@
  */
 package piramide.interaction.reasoner.creator.membershipgenerator.iterativeregion;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.junit.Test;
 
+import piramide.interaction.reasoner.RegionDistributionInfo;
 import piramide.interaction.reasoner.creator.LinguisticTermMembershipFunction;
 import piramide.interaction.reasoner.creator.Point;
 import piramide.interaction.reasoner.creator.WarningStore;
@@ -46,7 +48,7 @@ public class IterativeRegionMembershipFunctionGeneratorTest {
 		values2trends.put(2.0, 2.0);
 		values2trends.put(3.0, 2.0);
 		
-		final String linguisticTerm = "a";
+		final RegionDistributionInfo linguisticTerm = new RegionDistributionInfo("a", 1.0);
 		final IterativeRegionMembershipFunctionGenerator generator = new IterativeRegionMembershipFunctionGenerator(values2trends, new WarningStore());
 		final Universe universe = new Universe(values2trends, linguisticTerm);
 		
@@ -56,7 +58,7 @@ public class IterativeRegionMembershipFunctionGeneratorTest {
 		expectedPoints[1] = new Point(1.0, 1.0);
 		expectedPoints[2] = new Point(3.0, 0.0);	
 		
-		final LinguisticTermMembershipFunction expected = new LinguisticTermMembershipFunction(linguisticTerm, expectedPoints);
+		final LinguisticTermMembershipFunction expected = new LinguisticTermMembershipFunction(linguisticTerm.getName(), expectedPoints);
 		
 		final LinguisticTermMembershipFunction [] generated = generator.createUniqueMembershipFunction(universe, linguisticTerm);
 		assertEquals(expected.getName(), generated[0].getName());
@@ -80,7 +82,7 @@ public class IterativeRegionMembershipFunctionGeneratorTest {
 		values2trends.put(3.0, 2.0);
 		
 		final IterativeRegionMembershipFunctionGenerator generator = new IterativeRegionMembershipFunctionGenerator(values2trends, new WarningStore());
-		final LinguisticTermMembershipFunction [] functions = generator.createFunctions("a", "b");
+		final LinguisticTermMembershipFunction [] functions = generator.createFunctions(new RegionDistributionInfo("a", 0.5), new RegionDistributionInfo("b", 0.5));
 		assertEquals(2, functions.length);
 		
 		
@@ -121,7 +123,7 @@ public class IterativeRegionMembershipFunctionGeneratorTest {
 		values2trends.put(3.0, 2.0);
 		
 		final IterativeRegionMembershipFunctionGenerator generator = new IterativeRegionMembershipFunctionGenerator(values2trends, new WarningStore());
-		final LinguisticTermMembershipFunction [] functions = generator.createFunctions("a", "b", "c");
+		final LinguisticTermMembershipFunction [] functions = generator.createFunctions(new RegionDistributionInfo("a", 1 / 3.0), new RegionDistributionInfo("b", 1 / 3.0), new RegionDistributionInfo("c", 1 / 3.0));
 		assertEquals(3, functions.length);
 		
 		

@@ -41,7 +41,7 @@ public interface IFuzzyReasoner {
 	 * @param inputVariables the linguistic terms used for each capability
 	 * @return the inferred capabilities
 	 */
-	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, String[]> inputVariables) throws FuzzyReasonerException;
+	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables) throws FuzzyReasonerException;
 	
 	/**
 	 * Given initial capabilities, the fuzzy reasoner generates new capabilities. Example:
@@ -60,7 +60,7 @@ public interface IFuzzyReasoner {
 	 * @param geo where will the application be downloaded
 	 * @return the inferred capabilities
 	 */
-	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, String[]> inputVariables, Geolocation geo) throws FuzzyReasonerException;
+	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo) throws FuzzyReasonerException;
 	
 	/**
 	 * Given initial capabilities, the fuzzy reasoner generates new capabilities. Example:
@@ -78,7 +78,7 @@ public interface IFuzzyReasoner {
 	 * @param rules the set of rules in FCL format
 	 * @return the inferred capabilities
 	 */
-	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, String[]> inputVariables, Map<String, String[]> outputVariables, String rules) throws FuzzyReasonerException;
+	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Map<String, RegionDistributionInfo[]> outputVariables, String rules) throws FuzzyReasonerException;
 	
 	/**
 	 * Given initial capabilities, the fuzzy reasoner generates new capabilities. Example:
@@ -101,5 +101,5 @@ public interface IFuzzyReasoner {
 	 * @param rules the set of rules in FCL format
 	 * @return the inferred capabilities
 	 */
-	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, String[]> inputVariables, Geolocation geo, Map<String, String[]> outputVariables, String rules) throws FuzzyReasonerException;
+	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, Map<String, RegionDistributionInfo[]> outputVariables, String rules) throws FuzzyReasonerException;
 }

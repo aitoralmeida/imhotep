@@ -67,8 +67,8 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 			String deviceName, 
 			WarningStore warningStore,
 			Map<String, Object> initialCapabilities,
-			Map<String, String[]> inputVariables, Geolocation geo,
-			Map<String, String[]> outputVariables,
+			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo,
+			Map<String, RegionDistributionInfo[]> outputVariables,
 			String rules) throws FuzzyReasonerException {
 
 		// TODO: initialCapabilities is still used, and there are problems not considered:
@@ -99,8 +99,8 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 
 	FIS generateFISobject(String deviceName, WarningStore warningStore,
 			Map<String, Object> initialCapabilities,
-			Map<String, String[]> inputVariables, Geolocation geo,
-			Map<String, String[]> outputVariables, String rules)
+			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo,
+			Map<String, RegionDistributionInfo[]> outputVariables, String rules)
 			throws DatabaseException, InvalidSyntaxException,
 			FuzzyReasonerException {
 		final MobileDevices mobileDevices = this.databaseManager.getResults(geo);
@@ -189,15 +189,15 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 	}
 
 	private String generateRuleFileContent(
-			Map<String, String[]> inputVariables,
-			Map<String, String[]> outputVariables, String rules,
+			Map<String, RegionDistributionInfo[]> inputVariables,
+			Map<String, RegionDistributionInfo[]> outputVariables, String rules,
 			final MobileDevices mobileDevices, WarningStore warningStore) throws InvalidSyntaxException {
 		final Map<DeviceCapability, Variable> deviceInputVariables = new HashMap<DeviceCapability, Variable>();
 		final Map<UserCapability, Variable> userInputVariables = new HashMap<UserCapability, Variable>();
 		final Map<String, Variable> outVariables    = new HashMap<String, Variable>();
 		
 		for(String key : inputVariables.keySet()){
-			final String [] possibleValues = inputVariables.get(key);
+			final RegionDistributionInfo [] possibleValues = inputVariables.get(key);
 			final Variable variable = new Variable(key, Arrays.asList(possibleValues));
 			
 			boolean assigned = false;
@@ -227,7 +227,7 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 		}
 		
 		for(String key : outputVariables.keySet()){
-			final String [] possibleValues = outputVariables.get(key);
+			final RegionDistributionInfo [] possibleValues = outputVariables.get(key);
 			final Variable variable = new Variable(key, Arrays.asList(possibleValues));
 			outVariables.put(key, variable);
 		}
@@ -240,24 +240,24 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 	public Map<String, String> inferNewCapabilities(
 			String deviceName, 
 			WarningStore warningStore, Map<String, Object> initialCapabilities,
-			Map<String, String[]> inputVariables) throws FuzzyReasonerException {
-		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, Geolocation.ALL, new HashMap<String, String[]>(), "");
+			Map<String, RegionDistributionInfo[]> inputVariables) throws FuzzyReasonerException {
+		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, Geolocation.ALL, new HashMap<String, RegionDistributionInfo[]>(), "");
 	}
 
 	@Override
 	public Map<String, String> inferNewCapabilities(
 			String deviceName, 
 			WarningStore warningStore, Map<String, Object> initialCapabilities,
-			Map<String, String[]> inputVariables, Geolocation geo) throws FuzzyReasonerException {
-		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, geo, new HashMap<String, String[]>(), "");
+			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo) throws FuzzyReasonerException {
+		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, geo, new HashMap<String, RegionDistributionInfo[]>(), "");
 	}
 
 	@Override
 	public Map<String, String> inferNewCapabilities(
 			String deviceName, 
 			WarningStore warningStore, Map<String, Object> initialCapabilities,
-			Map<String, String[]> inputVariables, 
-			Map<String, String[]> outputVariables,
+			Map<String, RegionDistributionInfo[]> inputVariables, 
+			Map<String, RegionDistributionInfo[]> outputVariables,
 			String rules) throws FuzzyReasonerException {
 		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, Geolocation.ALL, outputVariables, rules);
 	}

@@ -39,6 +39,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import piramide.interaction.reasoner.RegionDistributionInfo;
+
 public class FCreateRules extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -174,16 +176,16 @@ public class FCreateRules extends JFrame implements ActionListener {
 		if (e.getSource().equals(this.cbInputVariables)){
 			this.cbInputTerms.removeAllItems();
 			String selectedVarName = (String)this.cbInputVariables.getSelectedItem();
-			List<String> terms = this.inputVariables.get(selectedVarName).getTerms();
-			for(String term : terms){
-				this.cbInputTerms.addItem(term);
+			List<RegionDistributionInfo> terms = this.inputVariables.get(selectedVarName).getTerms();
+			for(RegionDistributionInfo term : terms){
+				this.cbInputTerms.addItem(term.getName());
 			}		
 		} else if (e.getSource().equals(this.cbOutputVariables)){
 			this.cbOutputTerms.removeAllItems();
 			String selectedVarName = (String)this.cbOutputVariables.getSelectedItem();
-			List<String> terms = this.outputVariables.get(selectedVarName).getTerms();
-			for(String term : terms){
-				this.cbOutputTerms.addItem(term);
+			List<RegionDistributionInfo> terms = this.outputVariables.get(selectedVarName).getTerms();
+			for(RegionDistributionInfo term : terms){
+				this.cbOutputTerms.addItem(term.getName());
 			}		
 		} else if (e.getSource().equals(this.bAddInputVariable)){
 			this.taRules.setText(this.taRules.getText() + " " + (String)this.cbInputVariables.getSelectedItem() + " IS");

@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import piramide.interaction.reasoner.RegionDistributionInfo;
 import piramide.interaction.reasoner.creator.LinguisticTermMembershipFunction;
 import piramide.interaction.reasoner.creator.Point;
 import piramide.interaction.reasoner.creator.WarningStore;
@@ -44,7 +45,7 @@ public class IterativeRegionMembershipFunctionGenerator implements
 	}
 
 	@Override
-	public LinguisticTermMembershipFunction[] createFunctions(String ... linguisticTerms) {
+	public LinguisticTermMembershipFunction[] createFunctions(RegionDistributionInfo ... linguisticTerms) {
 		
 		final Universe universe = new Universe(this.values2trends, linguisticTerms);
 		final Universe bestUniverse = findBestUniverse(universe);
@@ -58,7 +59,7 @@ public class IterativeRegionMembershipFunctionGenerator implements
 		final LinguisticTermMembershipFunction [] functions = new LinguisticTermMembershipFunction[regions.length + 1];
 
 		if(regions.length > 0 && linguisticTerms.length > 0)
-			functions[0] = new LinguisticTermMembershipFunction(linguisticTerms[0], regions[0].getDescendingPoints());
+			functions[0] = new LinguisticTermMembershipFunction(linguisticTerms[0].getName(), regions[0].getDescendingPoints());
 		
 		for(int i = 0; i < regions.length; ++i){
 			final Region currentRegion = regions[i];
@@ -73,8 +74,8 @@ public class IterativeRegionMembershipFunctionGenerator implements
 			
 			final Point[] totalPoints = mergePoints(ascendingPoints, descendingPoints);
 			
-			final String name = linguisticTerms[i + 1];
-			functions[ i + 1 ] = new LinguisticTermMembershipFunction(name, totalPoints);
+			final RegionDistributionInfo linguisticTerm = linguisticTerms[i + 1];
+			functions[ i + 1 ] = new LinguisticTermMembershipFunction(linguisticTerm.getName(), totalPoints);
 		}
 		
 		if(bestUniverse.detectRepeatedLinguisticTerms())
@@ -83,7 +84,7 @@ public class IterativeRegionMembershipFunctionGenerator implements
 		return functions;
 	}
 	
-	LinguisticTermMembershipFunction [] createUniqueMembershipFunction(Universe universe, String linguisticTerm){
+	LinguisticTermMembershipFunction [] createUniqueMembershipFunction(Universe universe, RegionDistributionInfo linguisticTerm){
 		final Point points[] = new Point[3];
 		
 		points[0] = new Point(0.0, 0.0);
@@ -103,7 +104,7 @@ public class IterativeRegionMembershipFunctionGenerator implements
 		
 		final LinguisticTermMembershipFunction [] functions = new LinguisticTermMembershipFunction[1];
 			
-		functions[0] = new LinguisticTermMembershipFunction(linguisticTerm, points);
+		functions[0] = new LinguisticTermMembershipFunction(linguisticTerm.getName(), points);
 		return functions;
 		
 	}

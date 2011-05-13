@@ -94,7 +94,7 @@ public class FuzzyReasonerWizardFacade implements IFuzzyReasonerWizardFacade {
 	}
 
 	@Override
-	public void generateMembershipFunctionGraph(boolean isInput, boolean isDevices, String variableName, String[] linguisticTerms, OutputStream destination, int width, int height, Geolocation geo) {
+	public void generateMembershipFunctionGraph(boolean isInput, boolean isDevices, String variableName, RegionDistributionInfo[] linguisticTerms, OutputStream destination, int width, int height, Geolocation geo) {
 		BufferedImage img;
 		if(variableName == null){
 			img = createErrorMessagesImage("Error generating graph: variableName not provided");
@@ -116,14 +116,14 @@ public class FuzzyReasonerWizardFacade implements IFuzzyReasonerWizardFacade {
 						
 						final Variable var = new Variable(variableName, Arrays.asList(linguisticTerms));
 						deviceInputVariables.put(DeviceCapability.valueOf(variableName), var);
-						outputVariables.put("this", new Variable("is", Arrays.asList("nt","required")));
+						outputVariables.put("this", new Variable("is", Arrays.asList(new RegionDistributionInfo("nt",0.5),new RegionDistributionInfo("required",0.5))));
 					}else{
 						mobileDevices = new MobileDevices(new ArrayList<MobileDevice>());
 						
 						final Variable var = new Variable(variableName, Arrays.asList(linguisticTerms));
 						userInputVariables.put(UserCapability.valueOf(variableName), var);
 						
-						outputVariables.put("this", new Variable("is", Arrays.asList("nt","required")));
+						outputVariables.put("this", new Variable("is", Arrays.asList(new RegionDistributionInfo("nt",0.5),new RegionDistributionInfo("required",0.5))));
 					}
 				}else{
 					mobileDevices = new MobileDevices(new ArrayList<MobileDevice>());
@@ -136,7 +136,7 @@ public class FuzzyReasonerWizardFacade implements IFuzzyReasonerWizardFacade {
 				final FclCreator creator = new FclCreator();
 				final WarningStore warningStore = new WarningStore();
 				
-				final Set<String> set = new HashSet<String>(Arrays.asList(linguisticTerms));
+				final Set<RegionDistributionInfo> set = new HashSet<RegionDistributionInfo>(Arrays.asList(linguisticTerms));
 				if(set.size() != linguisticTerms.length)
 					warningStore.add("Repeated values provided!");
 				
@@ -225,7 +225,7 @@ public class FuzzyReasonerWizardFacade implements IFuzzyReasonerWizardFacade {
 	}
 
 	@Override
-	public FuzzyInferredResult getInferredValues(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, String[]> inputVariables, Geolocation geo, Map<String, String[]> outputVariables, String rules)
+	public FuzzyInferredResult getInferredValues(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, Map<String, RegionDistributionInfo[]> outputVariables, String rules)
 			throws FuzzyReasonerException {
 		
 		final FIS fis = this.fuzzyReasoner.generateFISobject(deviceName, warningStore, initialCapabilities, inputVariables, geo, outputVariables, rules);
@@ -235,18 +235,18 @@ public class FuzzyReasonerWizardFacade implements IFuzzyReasonerWizardFacade {
 		for(String variableName : inputVariables.keySet()){
 			results.put(variableName, new LinkedHashMap<String, Double>());
 			
-			for(String linguisticTerm : inputVariables.get(variableName)){
-				final double currentValue = fis.getVariable(variableName).getMembership(linguisticTerm);
-				results.get(variableName).put(linguisticTerm, Double.valueOf(currentValue));
+			for(RegionDistributionInfo linguisticTerm : inputVariables.get(variableName)){
+				final double currentValue = fis.getVariable(variableName).getMembership(linguisticTerm.getName());
+				results.get(variableName).put(linguisticTerm.getName(), Double.valueOf(currentValue));
 			}
 		}
 		
 		for(String variableName : outputVariables.keySet()){
 			results.put(variableName, new LinkedHashMap<String, Double>());
 			
-			for(String linguisticTerm : outputVariables.get(variableName)){
-				final double currentValue = fis.getVariable(variableName).getMembership(linguisticTerm);
-				results.get(variableName).put(linguisticTerm, Double.valueOf(currentValue));
+			for(RegionDistributionInfo linguisticTerm : outputVariables.get(variableName)){
+				final double currentValue = fis.getVariable(variableName).getMembership(linguisticTerm.getName());
+				results.get(variableName).put(linguisticTerm.getName(), Double.valueOf(currentValue));
 			}
 		}
 		

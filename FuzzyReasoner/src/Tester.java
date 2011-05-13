@@ -34,6 +34,7 @@ import net.sourceforge.jFuzzyLogic.FIS;
 import org.apache.commons.io.FileUtils;
 import org.jfree.chart.JFreeChart;
 
+import piramide.interaction.reasoner.RegionDistributionInfo;
 import piramide.interaction.reasoner.creator.FclCreator;
 import piramide.interaction.reasoner.creator.WarningStore;
 import piramide.interaction.reasoner.db.DatabaseManager;
@@ -52,8 +53,11 @@ public class Tester {
 	public static void main(String[] args) throws Exception {
 		
 		final String filename = "fcl/generated.fcl";
-		final String [] linguisticTerms = {"muuuuuuypeque", "muypeque", "peque", "normal", "grande", "muygrande", "muuuuygrande"};
-
+		final String [] linguisticTermNames = {"muuuuuuypeque", "muypeque", "peque", "normal", "grande", "muygrande", "muuuuygrande"};
+		final RegionDistributionInfo [] linguisticTerms = new RegionDistributionInfo[linguisticTermNames.length];
+		for(int i = 0; i < linguisticTermNames.length; ++i)
+			linguisticTerms[i] = new RegionDistributionInfo(linguisticTermNames[i], 1.0 / linguisticTerms.length);
+		
 		final boolean database = true;
 		
 		System.out.println("Creating dataset " + System.currentTimeMillis());
@@ -70,7 +74,7 @@ public class Tester {
 		inputVariables.put(DeviceCapability.reso_size, resoSizeVar);
 		
 		final Map<String, Variable> outputVariables = new HashMap<String, Variable>();
-		outputVariables.put("hey", new Variable("hey", Arrays.asList("ho","lets","go")));
+		outputVariables.put("hey", new Variable("hey", Arrays.asList(new RegionDistributionInfo("ho", 1.0 / 3), new RegionDistributionInfo("lets", 1.0 / 3), new RegionDistributionInfo("go", 1.0 / 3))));
 		final String rules = "// the rules \n";
 		
 		final FclCreator creator = new FclCreator();

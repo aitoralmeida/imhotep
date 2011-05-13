@@ -23,10 +23,11 @@
  */
 package piramide.interaction.reasoner.creator.membershipgenerator;
 
+import piramide.interaction.reasoner.RegionDistributionInfo;
 import piramide.interaction.reasoner.creator.LinguisticTermMembershipFunction;
 
 public interface IMembershipFunctionGenerator {
-	public LinguisticTermMembershipFunction [] createFunctions(String ... linguisticTerms);
+	public LinguisticTermMembershipFunction [] createFunctions(RegionDistributionInfo ... linguisticTerms);
 }
 
 

@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
 
+import piramide.interaction.reasoner.RegionDistributionInfo;
 import piramide.interaction.reasoner.creator.LinguisticTermMembershipFunction;
 import piramide.interaction.reasoner.creator.Point;
 import piramide.interaction.reasoner.creator.membershipgenerator.IMembershipFunctionGenerator;
@@ -40,13 +41,13 @@ public class RegionAccumulatorMembershipFunctionGenerator extends AbstractRegion
 	}
 	
 	@Override
-	public LinguisticTermMembershipFunction [] createFunctions(String ... linguisticTerms){
+	public LinguisticTermMembershipFunction [] createFunctions(RegionDistributionInfo ... linguisticTerms){
 		final LinguisticTermMembershipFunction [] functions = new LinguisticTermMembershipFunction[linguisticTerms.length];
 		
 		final List<Subregion> regions = createSubregions(linguisticTerms.length);
 		
 		for(int i = 0; i < linguisticTerms.length; ++i){
-			final String currentLinguisticTerm = linguisticTerms[i];
+			final RegionDistributionInfo currentLinguisticTerm = linguisticTerms[i];
 			
 			final List<Point> ascendingPoints; 
 			final List<Point> descendingPoints;
@@ -69,7 +70,7 @@ public class RegionAccumulatorMembershipFunctionGenerator extends AbstractRegion
 			ascendingPoints.add(0, firstPoint);
 			ascendingPoints.add(lastPoint);
 			
-			functions[i] = new LinguisticTermMembershipFunction(currentLinguisticTerm, ascendingPoints.toArray(new Point[]{}));
+			functions[i] = new LinguisticTermMembershipFunction(currentLinguisticTerm.getName(), ascendingPoints.toArray(new Point[]{}));
 		}
 		
 		return functions;

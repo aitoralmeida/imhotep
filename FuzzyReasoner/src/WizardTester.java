@@ -24,6 +24,7 @@
 import java.util.HashMap;
 import java.util.Vector;
 
+import piramide.interaction.reasoner.RegionDistributionInfo;
 import piramide.interaction.reasoner.wizard.FCreateInputVariables;
 import piramide.interaction.reasoner.wizard.FCreateRules;
 import piramide.interaction.reasoner.wizard.Variable;
@@ -47,10 +48,10 @@ public class WizardTester {
 	}
 
 	private static void tryRuleCreation() {
-		Vector<String> terms = new Vector<String>();
-		terms.add("term1");
-		terms.add("term2");
-		terms.add("term3");
+		Vector<RegionDistributionInfo> terms = new Vector<RegionDistributionInfo>();
+		terms.add(new RegionDistributionInfo("term1", 1 / 3.0));
+		terms.add(new RegionDistributionInfo("term2", 1 / 3.0));
+		terms.add(new RegionDistributionInfo("term3", 1 / 3.0));
 		Variable inVar = new Variable("Input", terms);
 		Variable outVar = new Variable("Output", terms);
 		HashMap<String, Variable> in = new HashMap<String,Variable>();

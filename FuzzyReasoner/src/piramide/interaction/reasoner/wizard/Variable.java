@@ -25,12 +25,14 @@ package piramide.interaction.reasoner.wizard;
 
 import java.util.List;
 
+import piramide.interaction.reasoner.RegionDistributionInfo;
+
 public class Variable {
 	
 	private final String name;
-	private final List<String> terms;
+	private final List<RegionDistributionInfo> terms;
 	
-	public Variable(String name, List<String> terms) {
+	public Variable(String name, List<RegionDistributionInfo> terms) {
 		super();
 		this.name = name;
 		this.terms = terms;
@@ -38,7 +40,7 @@ public class Variable {
 	public String getName() {
 		return this.name;
 	}
-	public List<String> getTerms() {
+	public List<RegionDistributionInfo> getTerms() {
 		return this.terms;
 	}
 
