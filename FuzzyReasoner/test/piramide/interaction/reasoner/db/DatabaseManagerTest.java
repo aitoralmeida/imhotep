@@ -52,7 +52,7 @@ public class DatabaseManagerTest {
 		final Map<Number, Double> results2trends = mobileDevices.getValue2trend(DeviceCapability.reso_size);
 		assertEquals(2, results2trends.size());
 		assertEquals(0.0, results2trends.get(0), 0.01);
-		assertEquals(25.0, results2trends.get(76800), 0.01);
+		assertEquals(22.5, results2trends.get(76800), 0.01);
 	}
 	
 	@Test

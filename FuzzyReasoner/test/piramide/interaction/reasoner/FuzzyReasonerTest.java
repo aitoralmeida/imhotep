@@ -134,20 +134,20 @@ public class FuzzyReasonerTest {
 		final Variable reso_size = fis.getVariable("reso_size");
 		assertEquals(reso_size.getLinguisticTerms().size(), 3);
 		final double smallValue = fis.getVariable("reso_size").getMembership("small");
-		assertEquals(0.7234203, smallValue, 0.001);
+		assertEquals(0.71298501, smallValue, 0.001);
 		final double normal1Value = fis.getVariable("reso_size").getMembership("normal");
-		assertEquals(0.27657, normal1Value, 0.001);
+		assertEquals(0.28701, normal1Value, 0.001);
 		final double bigValue = fis.getVariable("reso_size").getMembership("big");
 		assertEquals(0.0, bigValue, 0.0000001);
 
 		
 		final Variable video = fis.getVariable("video");
 		assertEquals(video.getLinguisticTerms().size(), 3);
-		assertEquals(0.322, video.defuzzify(), 0.001);
+		assertEquals(0.324, video.defuzzify(), 0.001);
 		final double lowValue = fis.getVariable("video").getMembership("low");
-		assertEquals(0.67799999, lowValue, 0.0001);
+		assertEquals(0.67599999, lowValue, 0.0001);
 		final double normalValue = fis.getVariable("video").getMembership("normal");
-		assertEquals(0.322, normalValue, 0.0001);
+		assertEquals(0.324, normalValue, 0.0001);
 		final double highValue = fis.getVariable("video").getMembership("high");
 		assertEquals(0.0, highValue, 0.0000001);
 	}

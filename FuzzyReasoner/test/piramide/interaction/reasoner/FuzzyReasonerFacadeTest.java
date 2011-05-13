@@ -17,7 +17,7 @@
  * listed below:
  *
  * Author: Aitor Almeida <aitor.almeida@deusto.es>
- *         Pablo Orduña <pablo.orduna@deusto.es>
+ *         Pablo Orduï¿½a <pablo.orduna@deusto.es>
  *         Eduardo Castillejo <eduardo.castillejo@deusto.es>
  *
  */
@@ -39,7 +39,7 @@ public class FuzzyReasonerFacadeTest {
 		FuzzyReasonerWizardFacade facade = new FuzzyReasonerWizardFacade();
 		MobileDevice device = facade.retrieveDeviceID("nokia 6630");
 		assertEquals("nokia 6630", device.getName());
-		assertEquals(248.12, device.getTotalTrend(), 0.0001);
+		assertEquals(433.219999999, device.getTotalTrend(), 0.0001);
 		assertEquals(2, device.getCapabilities().size());
 	}
 
@@ -48,7 +48,7 @@ public class FuzzyReasonerFacadeTest {
 	public void testSearchDeviceNames() throws Exception{
 		FuzzyReasonerWizardFacade facade = new FuzzyReasonerWizardFacade();
 		List<MobileDevice> devices = facade.searchDeviceNames("nokia", 1000);
-		assertEquals(316, devices.size());
+		assertEquals(337, devices.size());
 	}
 
 	@Test
