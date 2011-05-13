@@ -118,6 +118,17 @@ public class DatabaseMigrator extends DatabaseManager {
 				
 				final String deviceName = rsDownloaded.getString("device_name");
 				
+				if(deviceName.equals("htc x7500") || deviceName.equals("samsung sgh-m300") 
+						|| deviceName.equals("nokia verizon") || deviceName.equals("kddi a1407pt") 
+						|| deviceName.equals("nokia thr880i") || deviceName.equals("softbank softbank 910t") 
+						|| deviceName.equals("nokia 8860") || deviceName.equals("sony ericsson w580i")
+						|| deviceName.equals("motorola c139") || deviceName.equals("samsung stripe")
+						|| deviceName.equals("samsung sgh-c414") || deviceName.equals("samsung gt-e2121l")
+						|| deviceName.equals("samsung sgh-z400") || deviceName.equals("i-mobile 606")
+						|| deviceName.equals("softbank v302sh") || deviceName.equals("motorola krzr k1c")
+						)
+					continue;
+				
 				if(!deviceNames.contains(deviceName)){
 					stmtDevices.setString(1, deviceName);
 					stmtDevices.setString(2, rsDownloaded.getString("wurfl_id"));
@@ -161,8 +172,12 @@ public class DatabaseMigrator extends DatabaseManager {
 					final String errorMargin = csvReader.get(2);
 					
 					final String [] weekParts = week.split(" ");
-					
-					final int month = month2month.get(weekParts[0]).intValue();
+					final Integer monthString = month2month.get(weekParts[0]);
+					if(monthString == null){
+						System.err.println("Failed to load device: " + deviceName);
+						continue;
+					}
+					final int month = monthString.intValue();
 					final int year  = Integer.parseInt(weekParts[2]);
 					
 					if(month == previousMonth && year == previousYear){
@@ -171,8 +186,12 @@ public class DatabaseMigrator extends DatabaseManager {
 						continue;
 					}
 					
+					final String region = rsDownloaded.getString("region");
+					
+					//System.out.println(deviceName + " " + region + " " + month + " " + year);
+					
 					stmtTrends.setString(1, deviceName);
-					stmtTrends.setString(2, rsDownloaded.getString("region"));
+					stmtTrends.setString(2, region);
 					stmtTrends.setInt(3, previousMonth);
 					stmtTrends.setInt(4, previousYear);
 					stmtTrends.setFloat(5, currentValue);
