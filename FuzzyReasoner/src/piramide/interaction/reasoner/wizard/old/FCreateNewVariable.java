@@ -196,7 +196,7 @@ public class FCreateNewVariable extends JFrame implements ActionListener{
 			}
 			final Vector<RegionDistributionInfo> variableTerms = new Vector<RegionDistributionInfo>();
 			for(String variableTermName : variableTermNames){
-				variableTerms.add(new RegionDistributionInfo(variableTermName, 1.0 / variableTermNames.size()));
+				variableTerms.add(new RegionDistributionInfo(variableTermName, 1.0 / (variableTermNames.size() - 1)));
 			}
 			
 			final Variable variable = new Variable(variableName, variableTerms);

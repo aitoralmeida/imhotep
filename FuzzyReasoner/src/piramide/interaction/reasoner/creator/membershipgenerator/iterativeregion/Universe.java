@@ -36,7 +36,6 @@ class Universe {
 	private static final int LIMIT = 30; 
 	private final RegionDistributionInfo [] linguisticTerms;
 	
-	@Deprecated
 	Universe(Map<Number, Double> values2trends, String ... linguisticTerms){
 		this(values2trends, regionDistribution2string(linguisticTerms));
 	}

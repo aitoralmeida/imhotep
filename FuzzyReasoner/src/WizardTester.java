@@ -49,9 +49,9 @@ public class WizardTester {
 
 	private static void tryRuleCreation() {
 		Vector<RegionDistributionInfo> terms = new Vector<RegionDistributionInfo>();
-		terms.add(new RegionDistributionInfo("term1", 1 / 3.0));
-		terms.add(new RegionDistributionInfo("term2", 1 / 3.0));
-		terms.add(new RegionDistributionInfo("term3", 1 / 3.0));
+		terms.add(new RegionDistributionInfo("term1", 1 / 2.0));
+		terms.add(new RegionDistributionInfo("term2", 1 / 2.0));
+		terms.add(new RegionDistributionInfo("term3", 1 / 2.0));
 		Variable inVar = new Variable("Input", terms);
 		Variable outVar = new Variable("Output", terms);
 		HashMap<String, Variable> in = new HashMap<String,Variable>();

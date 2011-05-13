@@ -59,7 +59,7 @@ public class FuzzyReasonerTest {
 		final String rules =  	"RULE 1 : IF reso_size IS small THEN video IS low;\n";
 		
 		final Map<String, RegionDistributionInfo[]> inputVariables = new HashMap<String, RegionDistributionInfo[]>();
-		final RegionDistributionInfo[] termsReso = {new RegionDistributionInfo("big", 1/3.0), new RegionDistributionInfo("normal", 1 / 3.0), new RegionDistributionInfo("small", 1 / 3.0)};
+		final RegionDistributionInfo[] termsReso = {new RegionDistributionInfo("big", 1/2.0), new RegionDistributionInfo("normal", 1 / 2.0), new RegionDistributionInfo("small", 1 / 2.0)};
 		inputVariables.put("reso_size", termsReso); 
 		
 		final Map<String, RegionDistributionInfo[]> outputVariables = new HashMap<String, RegionDistributionInfo[]>();
@@ -85,11 +85,11 @@ public class FuzzyReasonerTest {
 		final String rules =  	"RULE 1 : PATATA MELON FAIL;\n";
 		
 		final Map<String, RegionDistributionInfo[]> inputVariables = new HashMap<String, RegionDistributionInfo[]>();
-		final RegionDistributionInfo[] termsReso = {new RegionDistributionInfo("big", 1 / 3.0), new RegionDistributionInfo("normal", 1 / 3.0), new RegionDistributionInfo("small", 1 / 3.0)};
+		final RegionDistributionInfo[] termsReso = {new RegionDistributionInfo("big", 1 / 2.0), new RegionDistributionInfo("normal", 1 / 2.0), new RegionDistributionInfo("small", 1 / 2.0)};
 		inputVariables.put("reso_size", termsReso); 
 		
 		final Map<String, RegionDistributionInfo[]> outputVariables = new HashMap<String, RegionDistributionInfo[]>();
-		final RegionDistributionInfo[] termsVideo = {new RegionDistributionInfo("high", 1 / 3.0), new RegionDistributionInfo("normal", 1 / 3.0), new RegionDistributionInfo("low", 1 / 3.0)};
+		final RegionDistributionInfo[] termsVideo = {new RegionDistributionInfo("high", 1 / 2.0), new RegionDistributionInfo("normal", 1 / 2.0), new RegionDistributionInfo("low", 1 / 2.0)};
 		outputVariables.put("video", termsVideo); 
 								
 		final Map<String, Object> initialCapabilities =  new HashMap<String, Object>();
@@ -105,11 +105,11 @@ public class FuzzyReasonerTest {
 		final String rules =  	"RULE 1 : IF reso_size IS small THEN video IS low;\n";
 		
 		final Map<String, RegionDistributionInfo[]> inputVariables = new HashMap<String, RegionDistributionInfo[]>();
-		final RegionDistributionInfo[] termsReso = {new RegionDistributionInfo("small", 1 / 3.0), new RegionDistributionInfo("normal", 1 / 3.0), new RegionDistributionInfo("big", 1 / 3.0)};
+		final RegionDistributionInfo[] termsReso = {new RegionDistributionInfo("small", 1 / 2.0), new RegionDistributionInfo("normal", 1 / 2.0), new RegionDistributionInfo("big", 1 / 2.0)};
 		inputVariables.put("reso_size", termsReso); 
 		
 		final Map<String, RegionDistributionInfo[]> outputVariables = new HashMap<String, RegionDistributionInfo[]>();
-		final RegionDistributionInfo[] termsVideo = {new RegionDistributionInfo("low", 1 / 3.0), new RegionDistributionInfo("normal", 1 / 3.0), new RegionDistributionInfo("high", 1 / 3.0)};
+		final RegionDistributionInfo[] termsVideo = {new RegionDistributionInfo("low", 1 / 2.0), new RegionDistributionInfo("normal", 1 / 2.0), new RegionDistributionInfo("high", 1 / 2.0)};
 		outputVariables.put("video", termsVideo); 
 								
 		final Map<String, Object> initialCapabilities =  new HashMap<String, Object>();
@@ -157,11 +157,11 @@ public class FuzzyReasonerTest {
 		final String rules =  	"RULE 1 : IF reso_size IS small THEN video IS low;\n";
 		
 		final Map<String, RegionDistributionInfo[]> inputVariables = new HashMap<String, RegionDistributionInfo[]>();
-		final RegionDistributionInfo[] termsReso = {new RegionDistributionInfo("small", 1 / 18.0), new RegionDistributionInfo("a1", 1 / 18.0),  new RegionDistributionInfo("a2", 1 / 18.0),  new RegionDistributionInfo("a3", 1 / 18.0),  new RegionDistributionInfo("a4", 1 / 18.0),  new RegionDistributionInfo("a5", 1 / 18.0),  new RegionDistributionInfo("a6", 1 / 18.0),  new RegionDistributionInfo("a7", 1 / 18.0),  new RegionDistributionInfo("a8", 1 / 18.0),  new RegionDistributionInfo("a9", 1 / 18.0),  new RegionDistributionInfo("a10", 1 / 18.0),  new RegionDistributionInfo("a11", 1 / 18.0),  new RegionDistributionInfo("a12", 1 / 18.0),  new RegionDistributionInfo("a13", 1 / 18.0),  new RegionDistributionInfo("a14", 1 / 18.0),  new RegionDistributionInfo("a15", 1 / 18.0),  new RegionDistributionInfo("a16", 1 / 18.0),  new RegionDistributionInfo("a17", 1 / 18.0)};
+		final RegionDistributionInfo[] termsReso = {new RegionDistributionInfo("small", 1 / 17.0), new RegionDistributionInfo("a1", 1 / 17.0),  new RegionDistributionInfo("a2", 1 / 17.0),  new RegionDistributionInfo("a3", 1 / 17.0),  new RegionDistributionInfo("a4", 1 / 17.0),  new RegionDistributionInfo("a5", 1 / 17.0),  new RegionDistributionInfo("a6", 1 / 17.0),  new RegionDistributionInfo("a7", 1 / 17.0),  new RegionDistributionInfo("a8", 1 / 17.0),  new RegionDistributionInfo("a9", 1 / 17.0),  new RegionDistributionInfo("a10", 1 / 17.0),  new RegionDistributionInfo("a11", 1 / 17.0),  new RegionDistributionInfo("a12", 1 / 17.0),  new RegionDistributionInfo("a13", 1 / 17.0),  new RegionDistributionInfo("a14", 1 / 17.0),  new RegionDistributionInfo("a15", 1 / 17.0),  new RegionDistributionInfo("a16", 1 / 17.0),  new RegionDistributionInfo("a17", 1 / 17.0)};
 		inputVariables.put("reso_size", termsReso); 
 		
 		final Map<String, RegionDistributionInfo[]> outputVariables = new HashMap<String, RegionDistributionInfo[]>();
-		final RegionDistributionInfo[] termsVideo = {new RegionDistributionInfo("low", 1 / 3.0), new RegionDistributionInfo("normal", 1 / 3.0), new RegionDistributionInfo("high", 1 / 3.0)};
+		final RegionDistributionInfo[] termsVideo = {new RegionDistributionInfo("low", 1 / 2.0), new RegionDistributionInfo("normal", 1 / 2.0), new RegionDistributionInfo("high", 1 / 2.0)};
 		outputVariables.put("video", termsVideo); 
 								
 		final Map<String, Object> initialCapabilities =  new HashMap<String, Object>();

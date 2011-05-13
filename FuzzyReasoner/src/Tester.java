@@ -56,7 +56,7 @@ public class Tester {
 		final String [] linguisticTermNames = {"muuuuuuypeque", "muypeque", "peque", "normal", "grande", "muygrande", "muuuuygrande"};
 		final RegionDistributionInfo [] linguisticTerms = new RegionDistributionInfo[linguisticTermNames.length];
 		for(int i = 0; i < linguisticTermNames.length; ++i)
-			linguisticTerms[i] = new RegionDistributionInfo(linguisticTermNames[i], 1.0 / linguisticTerms.length);
+			linguisticTerms[i] = new RegionDistributionInfo(linguisticTermNames[i], 1.0 / (linguisticTerms.length - 1));
 		
 		final boolean database = true;
 		
@@ -74,7 +74,7 @@ public class Tester {
 		inputVariables.put(DeviceCapability.reso_size, resoSizeVar);
 		
 		final Map<String, Variable> outputVariables = new HashMap<String, Variable>();
-		outputVariables.put("hey", new Variable("hey", Arrays.asList(new RegionDistributionInfo("ho", 1.0 / 3), new RegionDistributionInfo("lets", 1.0 / 3), new RegionDistributionInfo("go", 1.0 / 3))));
+		outputVariables.put("hey", new Variable("hey", Arrays.asList(new RegionDistributionInfo("ho", 1.0 / 2), new RegionDistributionInfo("lets", 1.0 / 2), new RegionDistributionInfo("go", 1.0 / 2))));
 		final String rules = "// the rules \n";
 		
 		final FclCreator creator = new FclCreator();
@@ -94,7 +94,8 @@ public class Tester {
         
         
         JFreeChart theChart = realSize.chart(false);
-        BufferedImage img = theChart.createBufferedImage(1000, 1000);
+        @SuppressWarnings("unused")
+		BufferedImage img = theChart.createBufferedImage(1000, 1000);
         
         /*
         FileOutputStream fos = new FileOutputStream("imagen.png");
