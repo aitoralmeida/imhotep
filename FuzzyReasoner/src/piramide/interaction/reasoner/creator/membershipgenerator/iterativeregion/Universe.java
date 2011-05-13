@@ -33,18 +33,16 @@ class Universe {
 	private final int linguisticTermNumber;
 	private final Region [] regions;
 	private final double sumOfTrends;
-	private static final int LIMIT = 30;
+	private static final int LIMIT = 30; 
 	private final RegionDistributionInfo [] linguisticTerms;
-
+	
 	@Deprecated
 	Universe(Map<Number, Double> values2trends, String ... linguisticTerms){
 		this(values2trends, regionDistribution2string(linguisticTerms));
 	}
 	
 	Universe(Map<Number, Double> values2trends, RegionDistributionInfo ... linguisticTerms){
-		
 		this.linguisticTerms = linguisticTerms;
-		
 		if(linguisticTerms.length > LIMIT)
 			throw new IllegalArgumentException("Too many linguistic terms! Maximum: " + LIMIT);
 		
@@ -74,17 +72,18 @@ class Universe {
 		
 		this.initializeToLeft();
 	}
-		
+	
+	
 	private Universe(Individual [] individuals, int linguisticTermNumber, Region [] regions, double sumOfTrends, RegionDistributionInfo [] linguisticTerms){
 		this.individuals          = individuals;
 		this.linguisticTermNumber = linguisticTermNumber;
 		this.regions              = regions;
 		this.sumOfTrends		  = sumOfTrends;
-		this.linguisticTerms = linguisticTerms;
+		this.linguisticTerms      = linguisticTerms;
 	}
 	
-	private double getIdealTrendForRegion(int regionNumber){
-		return this.sumOfTrends * this.linguisticTerms[regionNumber].getProportion();
+	private double getIdealTrendForRegion(){
+		return this.sumOfTrends / this.regions.length;
 	}
 	
 	double getSumOfTrends() {
@@ -92,12 +91,12 @@ class Universe {
 	}
 	
 	private void initializeToLeft(){
+		final double targetTrend = getIdealTrendForRegion();
 		
 		double accumulatedTrend = 0.0;
 		int regionNumber = 1;
 		int previousBoundary = 0;
 		for (int i = 0; i < this.individuals.length; i++) {
-			final double targetTrend = getIdealTrendForRegion(i);
 			accumulatedTrend += this.individuals[i].getTrend();
 			while(greaterThan(accumulatedTrend, regionNumber * targetTrend, 0.0000001)){
 				this.regions[regionNumber - 1] = new Region(new Boundary(previousBoundary), new Boundary(i), this, regionNumber - 1);
@@ -217,9 +216,9 @@ class Universe {
 	private double heuristicClosestToMean() {
 		double heuristic = 0.0;
 		
-		for(int i = 0; i < this.regions.length; ++i){
-			final Region region = this.regions[i];
-			final double idealTrend = getIdealTrendForRegion(i);
+		final double idealTrend = getIdealTrendForRegion();
+		
+		for(Region region : this.regions){
 			final double regionTrend = region.getTrendSum();
 			heuristic += Math.abs(regionTrend - idealTrend);
 		}
