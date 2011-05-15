@@ -29,6 +29,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import piramide.interaction.reasoner.db.decay.DecayFunctionFactory;
+import piramide.interaction.reasoner.db.decay.IDecayFunction;
+import piramide.interaction.reasoner.db.decay.DecayFunctionFactory.DecayFunctions;;
+
 public class MobileDevice implements Serializable {
 	
 	private static final long serialVersionUID = -2495118951093453957L;
@@ -37,14 +41,16 @@ public class MobileDevice implements Serializable {
 	private final Map<DeviceCapability, Number> capabilities;
 	private final List<Trend> trends;
 	private final QueryInformation queryInformation;
+	private final DecayFunctions decayFunction;
 	
 	
-	public MobileDevice(String name, Map<DeviceCapability, Number> capabilities, List<Trend> trends, QueryInformation queryInformation) {
+	public MobileDevice(String name, Map<DeviceCapability, Number> capabilities, List<Trend> trends, QueryInformation queryInformation, DecayFunctions decayFunction) {
 		super();
 		this.name = name;
 		this.capabilities = capabilities;
 		this.trends = trends;
 		this.queryInformation = queryInformation;
+		this.decayFunction = decayFunction;
 	}
 	
 	public String getName() {
@@ -105,13 +111,15 @@ public class MobileDevice implements Serializable {
 		final Calendar cal = CalendarFactory.now();  
 		final int actualMonth = cal.get(Calendar.MONTH);
 		final int actualYear = cal.get(Calendar.YEAR);
+		final DecayFunctionFactory decayFunctionFactory = new DecayFunctionFactory();
+		final IDecayFunction decayFunction = decayFunctionFactory.create(this.decayFunction);
 		
 		final int actualMonths = ((actualYear - 1) * 12) + actualMonth;
 		final Vector<Trend> trends = new Vector<Trend>();
 		for (Trend trend : this.getValidTrends()) {
 			final int trendMonths = ((trend.getYear() -1) * 12) + trend.getMonth();
 			final int monthsPassed = actualMonths - trendMonths;
-			final double decay = getDecay(monthsPassed);
+			final double decay = decayFunction.getDecay(monthsPassed);
 			final Trend t = new Trend(trend.getYear(), trend.getMonth(), trend.getValue() * decay);
 			trends.add(t);
 		}
@@ -119,22 +127,6 @@ public class MobileDevice implements Serializable {
 		return trends;
 	}	
 	
-	private double getDecay(int monthsPassed) {
-		double decay;
-		if (monthsPassed <= 15){  //1st year
-			decay = 1.0;
-		} else if (monthsPassed > 15 & monthsPassed <= 24){ // 2nd sear
-			decay = 0.9;
-		} else if (monthsPassed > 24 & monthsPassed <= 36){ //3rd year
-			decay = 0.4;
-		} else if (monthsPassed > 36 & monthsPassed <= 60){ //4rd and 5th year
-			decay = 0.1;
-		}else{ //the rest
-			decay = 0.05;
-		}
-		return decay;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

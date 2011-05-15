@@ -36,12 +36,15 @@ import java.util.Map;
 import java.util.Vector;
 
 import piramide.interaction.reasoner.Geolocation;
+import piramide.interaction.reasoner.db.decay.DecayFunctionFactory.DecayFunctions;
 
 public class DatabaseManager implements IDatabaseManager {
 	
 	public static final String USERNAME = "piramide";
 	public static final String PASSWORD = "piramide_password";
 	public static final String CONNECTION_URL = "jdbc:mysql://localhost:3306/PiramideTrendsFull";
+	public static final DecayFunctions decayFunction = DecayFunctions.model;
+	
 	
 	public DatabaseManager() throws DatabaseException {
 		try {
@@ -185,7 +188,7 @@ public class DatabaseManager implements IDatabaseManager {
 			capabilities.put(capability, (Number)rsDevices.getObject(capability.name()));
 		
 		
-		return new MobileDevice(rsDevices.getString("device_name"), capabilities, trends, queryInformation);
+		return new MobileDevice(rsDevices.getString("device_name"), capabilities, trends, queryInformation, decayFunction);
 	}
 	
 	private static class MaxDateHolder{

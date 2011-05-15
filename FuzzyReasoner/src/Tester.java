@@ -45,6 +45,7 @@ import piramide.interaction.reasoner.db.MobileDevices;
 import piramide.interaction.reasoner.db.QueryInformation;
 import piramide.interaction.reasoner.db.Trend;
 import piramide.interaction.reasoner.db.UserCapabilities.UserCapability;
+import piramide.interaction.reasoner.db.decay.DecayFunctionFactory.DecayFunctions;
 import piramide.interaction.reasoner.wizard.Variable;
 
 
@@ -131,7 +132,7 @@ public class Tester {
 		final List<Trend> trends = Arrays.asList(new Trend(2009, 12, trend));
 		final Map<DeviceCapability, Number> capabilities = new HashMap<DeviceCapability, Number>();
 		capabilities.put(DeviceCapability.real_size, new Double(realSize));
-		MobileDevice device1 = new MobileDevice(name, capabilities, trends, queryInfo);
+		MobileDevice device1 = new MobileDevice(name, capabilities, trends, queryInfo, DecayFunctions.model);
 		return device1;
 	}
 }

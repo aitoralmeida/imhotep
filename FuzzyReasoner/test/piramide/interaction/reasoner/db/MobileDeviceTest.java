@@ -35,6 +35,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import piramide.interaction.reasoner.db.decay.DecayFunctionFactory.DecayFunctions;
+
 @SuppressWarnings("boxing")
 public class MobileDeviceTest {
 
@@ -87,7 +89,7 @@ public class MobileDeviceTest {
 		// A trend after the queryInformation
 		trends.add(new Trend(2010, 1, 40));
 		
-		return new MobileDevice("muzzy", capabilities, trends, queryInformation);
+		return new MobileDevice("muzzy", capabilities, trends, queryInformation, DecayFunctions.model);
 	}
 	
 	static MobileDevice createMobileDevice2() {
@@ -104,7 +106,7 @@ public class MobileDeviceTest {
 		// A trend which is trend > 60
 		trends.add(new Trend(2009, 12, 10));
 		
-		return new MobileDevice("muzzy2", capabilities, trends, queryInformation);
+		return new MobileDevice("muzzy2", capabilities, trends, queryInformation, DecayFunctions.model);
 	}
 		
 	static MobileDevice createMobileDevice3() {
@@ -121,7 +123,7 @@ public class MobileDeviceTest {
 		// A trend which is trend > 60
 		trends.add(new Trend(2009, 12, 10));
 		
-		return new MobileDevice("muzzy2", capabilities, trends, queryInformation);
+		return new MobileDevice("muzzy2", capabilities, trends, queryInformation, DecayFunctions.model);
 	}
 		
 	
@@ -140,7 +142,7 @@ public class MobileDeviceTest {
 	}
 
 	@Test
-	public void testCalculateDecay() {
+	public void testCalculateDecayModel() {
 		final List<Trend> calculatedTrends = this.mobileDevice.calculateDecay();
 		
 		assertEquals(8, calculatedTrends.size());
