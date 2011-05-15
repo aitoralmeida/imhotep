@@ -44,6 +44,7 @@ import piramide.interaction.reasoner.db.IDatabaseManager;
 import piramide.interaction.reasoner.db.MobileDevice;
 import piramide.interaction.reasoner.db.MobileDevices;
 import piramide.interaction.reasoner.db.UserCapabilities.UserCapability;
+import piramide.interaction.reasoner.db.decay.DecayFunctionFactory.DecayFunctions;
 import piramide.interaction.reasoner.wizard.Variable;
 
 public class FuzzyReasoner implements IFuzzyReasoner {
@@ -67,7 +68,7 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 			String deviceName, 
 			WarningStore warningStore,
 			Map<String, Object> initialCapabilities,
-			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo,
+			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction,
 			Map<String, RegionDistributionInfo[]> outputVariables,
 			String rules) throws FuzzyReasonerException {
 
@@ -75,7 +76,7 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 		// - Is getResults() fast enough? Should a cache be used?
 		 //TODO: HAcer test
 		final FIS fis = generateFISobject(deviceName, warningStore,
-				initialCapabilities, inputVariables, geo, outputVariables,
+				initialCapabilities, inputVariables, geo, decayFunction, outputVariables,
 				rules);
 		
 		Map<String, String> inferred = new HashMap<String, String>();
@@ -99,11 +100,11 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 
 	FIS generateFISobject(String deviceName, WarningStore warningStore,
 			Map<String, Object> initialCapabilities,
-			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo,
+			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction,
 			Map<String, RegionDistributionInfo[]> outputVariables, String rules)
 			throws DatabaseException, InvalidSyntaxException,
 			FuzzyReasonerException {
-		final MobileDevices mobileDevices = this.databaseManager.getResults(geo);
+		final MobileDevices mobileDevices = this.databaseManager.getResults(geo, decayFunction);
 		final MobileDevice device = this.getMobileDevice(mobileDevices, deviceName);		
 		
 		final String ruleFileContent = generateRuleFileContent(inputVariables, outputVariables, rules, mobileDevices, warningStore);
@@ -241,15 +242,15 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 			String deviceName, 
 			WarningStore warningStore, Map<String, Object> initialCapabilities,
 			Map<String, RegionDistributionInfo[]> inputVariables) throws FuzzyReasonerException {
-		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, Geolocation.ALL, new HashMap<String, RegionDistributionInfo[]>(), "");
+		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, new HashMap<String, RegionDistributionInfo[]>(), "");
 	}
 
 	@Override
 	public Map<String, String> inferNewCapabilities(
 			String deviceName, 
 			WarningStore warningStore, Map<String, Object> initialCapabilities,
-			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo) throws FuzzyReasonerException {
-		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, geo, new HashMap<String, RegionDistributionInfo[]>(), "");
+			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction) throws FuzzyReasonerException {
+		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, geo, decayFunction, new HashMap<String, RegionDistributionInfo[]>(), "");
 	}
 
 	@Override
@@ -259,6 +260,6 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 			Map<String, RegionDistributionInfo[]> inputVariables, 
 			Map<String, RegionDistributionInfo[]> outputVariables,
 			String rules) throws FuzzyReasonerException {
-		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, Geolocation.ALL, outputVariables, rules);
+		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, outputVariables, rules);
 	}
 }

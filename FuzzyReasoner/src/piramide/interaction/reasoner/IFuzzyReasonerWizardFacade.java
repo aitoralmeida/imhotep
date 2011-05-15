@@ -29,6 +29,7 @@ import java.util.Map;
 
 import piramide.interaction.reasoner.creator.WarningStore;
 import piramide.interaction.reasoner.db.MobileDevice;
+import piramide.interaction.reasoner.db.decay.DecayFunctionFactory.DecayFunctions;
 
 public interface IFuzzyReasonerWizardFacade {
 	public void initializeCacheData();
@@ -37,9 +38,9 @@ public interface IFuzzyReasonerWizardFacade {
 	
 	public MobileDevice retrieveDeviceID(String request) throws FuzzyReasonerException;
 	
-	public void generateMembershipFunctionGraph(boolean inputOutput, boolean devicesUsers, String variableName, RegionDistributionInfo [] linguisticTerms, OutputStream destination, int width, int height, Geolocation geo) throws FuzzyReasonerException;
+	public void generateMembershipFunctionGraph(boolean inputOutput, boolean devicesUsers, String variableName, RegionDistributionInfo [] linguisticTerms, OutputStream destination, int width, int height, Geolocation geo, DecayFunctions decayFunction) throws FuzzyReasonerException;
 	
 	public String [] getGeolocationRegions() throws FuzzyReasonerException;
 	
-	public FuzzyInferredResult getInferredValues(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, Map<String, RegionDistributionInfo[]> outputVariables, String rules) throws FuzzyReasonerException;
+	public FuzzyInferredResult getInferredValues(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction, Map<String, RegionDistributionInfo[]> outputVariables, String rules) throws FuzzyReasonerException;
 }

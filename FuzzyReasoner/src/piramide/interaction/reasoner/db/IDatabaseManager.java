@@ -26,6 +26,7 @@ package piramide.interaction.reasoner.db;
 import java.util.List;
 
 import piramide.interaction.reasoner.Geolocation;
+import piramide.interaction.reasoner.db.decay.DecayFunctionFactory.DecayFunctions;
 
 public interface IDatabaseManager {
 
@@ -33,12 +34,12 @@ public interface IDatabaseManager {
 
 	public abstract MobileDevices getResults(int size) throws DatabaseException;
 
-	public abstract MobileDevices getResults(Geolocation geo)
+	public abstract MobileDevices getResults(Geolocation geo, DecayFunctions decayFunction)
 			throws DatabaseException;
 
 	public abstract String[] getGeolocation() throws DatabaseException;
 
-	public abstract MobileDevices getResults(int size, Geolocation geo)
+	public abstract MobileDevices getResults(int size, Geolocation geo, DecayFunctions decayFunction)
 			throws DatabaseException;
 
 	public abstract MobileDevice retrieveDeviceNames(String deviceID)

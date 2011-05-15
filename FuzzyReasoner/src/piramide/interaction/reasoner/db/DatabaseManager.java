@@ -43,7 +43,6 @@ public class DatabaseManager implements IDatabaseManager {
 	public static final String USERNAME = "piramide";
 	public static final String PASSWORD = "piramide_password";
 	public static final String CONNECTION_URL = "jdbc:mysql://localhost:3306/PiramideTrendsFull";
-	public static final DecayFunctions decayFunction = DecayFunctions.model;
 	
 	
 	public DatabaseManager() throws DatabaseException {
@@ -75,17 +74,17 @@ public class DatabaseManager implements IDatabaseManager {
 	
 	@Override
 	public MobileDevices getResults() throws DatabaseException {
-		return getResults(-1, Geolocation.ALL);
+		return getResults(-1, Geolocation.ALL, DecayFunctions.model);
 	}
 		
 	@Override
 	public MobileDevices getResults(int size) throws DatabaseException {
-		return getResults(size, Geolocation.ALL);
+		return getResults(size, Geolocation.ALL, DecayFunctions.model);
 	}
 		
 	@Override
-	public MobileDevices getResults(Geolocation geo) throws DatabaseException {
-		return getResults(-1, geo);
+	public MobileDevices getResults(Geolocation geo, DecayFunctions decayFunction) throws DatabaseException {
+		return getResults(-1, geo, decayFunction);
 	}
 	
 	@Override
@@ -105,7 +104,7 @@ public class DatabaseManager implements IDatabaseManager {
 	}
 	
 	@Override
-	public MobileDevices getResults(int size, Geolocation geo) throws DatabaseException {
+	public MobileDevices getResults(int size, Geolocation geo, DecayFunctions decayFunction) throws DatabaseException {
 		final QueryInformation queryInformation = new QueryInformation();
 		
 		final List<MobileDevice> devices = new Vector<MobileDevice>();
@@ -144,7 +143,7 @@ public class DatabaseManager implements IDatabaseManager {
 					break;
 				final MaxDateHolder currentMaxDate = new MaxDateHolder();
 				
-				final MobileDevice mobileDevice = retrieveMobileDevice(geo, queryInformation, con, rsDevices, currentMaxDate);
+				final MobileDevice mobileDevice = retrieveMobileDevice(geo, queryInformation, con, rsDevices, currentMaxDate, decayFunction);
 				devices.add(mobileDevice);
 				
 				if(currentMaxDate.getCurrentMaxDate() != 0 && currentMaxDate.getCurrentMaxDate() < maxDate)
@@ -165,7 +164,7 @@ public class DatabaseManager implements IDatabaseManager {
 
 	private MobileDevice retrieveMobileDevice(Geolocation geo,
 			final QueryInformation queryInformation, final Connection con,
-			final ResultSet rsDevices, final MaxDateHolder currentMaxDate)
+			final ResultSet rsDevices, final MaxDateHolder currentMaxDate, DecayFunctions decayFunction)
 			throws SQLException {
 		final PreparedStatement stmtTrends = con.prepareStatement("SELECT value, year, month FROM Trends WHERE device_name = ? AND region = ?");
 		stmtTrends.setString(1, rsDevices.getString("device_name"));
@@ -227,7 +226,7 @@ public class DatabaseManager implements IDatabaseManager {
 			final QueryInformation info = new QueryInformation();
 			final MaxDateHolder currentMaxDate = new MaxDateHolder();
 			
-			return retrieveMobileDevice(Geolocation.ALL, info, con, dbResults, currentMaxDate);
+			return retrieveMobileDevice(Geolocation.ALL, info, con, dbResults, currentMaxDate, DecayFunctions.model);
 		} catch (SQLException e) {
 			throw new DatabaseException("Database error: " + e.getMessage(), e);
 		} finally {
@@ -299,7 +298,7 @@ public class DatabaseManager implements IDatabaseManager {
 				final QueryInformation info = new QueryInformation();
 				final MaxDateHolder currentMaxDate = new MaxDateHolder();
 				
-				final MobileDevice mobileDevice = retrieveMobileDevice(Geolocation.ALL, info, con, dbResults, currentMaxDate);
+				final MobileDevice mobileDevice = retrieveMobileDevice(Geolocation.ALL, info, con, dbResults, currentMaxDate, DecayFunctions.model);
 				results.add(mobileDevice);
 			}
 			

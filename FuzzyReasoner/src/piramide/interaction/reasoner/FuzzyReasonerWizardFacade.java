@@ -59,6 +59,7 @@ import piramide.interaction.reasoner.db.IDatabaseManager;
 import piramide.interaction.reasoner.db.MobileDevice;
 import piramide.interaction.reasoner.db.MobileDevices;
 import piramide.interaction.reasoner.db.UserCapabilities.UserCapability;
+import piramide.interaction.reasoner.db.decay.DecayFunctionFactory.DecayFunctions;
 import piramide.interaction.reasoner.wizard.Variable;
 
 public class FuzzyReasonerWizardFacade implements IFuzzyReasonerWizardFacade {
@@ -94,7 +95,7 @@ public class FuzzyReasonerWizardFacade implements IFuzzyReasonerWizardFacade {
 	}
 
 	@Override
-	public void generateMembershipFunctionGraph(boolean isInput, boolean isDevices, String variableName, RegionDistributionInfo[] linguisticTerms, OutputStream destination, int width, int height, Geolocation geo) {
+	public void generateMembershipFunctionGraph(boolean isInput, boolean isDevices, String variableName, RegionDistributionInfo[] linguisticTerms, OutputStream destination, int width, int height, Geolocation geo, DecayFunctions decayFunction) {
 		BufferedImage img;
 		if(variableName == null){
 			img = createErrorMessagesImage("Error generating graph: variableName not provided");
@@ -112,7 +113,7 @@ public class FuzzyReasonerWizardFacade implements IFuzzyReasonerWizardFacade {
 				final MobileDevices mobileDevices;
 				if(isInput){
 					if(isDevices){
-						mobileDevices = this.dbManager.getResults(geo);
+						mobileDevices = this.dbManager.getResults(geo, decayFunction);
 						
 						final Variable var = new Variable(variableName, Arrays.asList(linguisticTerms));
 						deviceInputVariables.put(DeviceCapability.valueOf(variableName), var);
@@ -225,10 +226,10 @@ public class FuzzyReasonerWizardFacade implements IFuzzyReasonerWizardFacade {
 	}
 
 	@Override
-	public FuzzyInferredResult getInferredValues(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, Map<String, RegionDistributionInfo[]> outputVariables, String rules)
+	public FuzzyInferredResult getInferredValues(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction, Map<String, RegionDistributionInfo[]> outputVariables, String rules)
 			throws FuzzyReasonerException {
 		
-		final FIS fis = this.fuzzyReasoner.generateFISobject(deviceName, warningStore, initialCapabilities, inputVariables, geo, outputVariables, rules);
+		final FIS fis = this.fuzzyReasoner.generateFISobject(deviceName, warningStore, initialCapabilities, inputVariables, geo, decayFunction, outputVariables, rules);
 		
 		final HashMap<String, LinkedHashMap<String, Double>> results = new HashMap<String, LinkedHashMap<String,Double>>();
 		
