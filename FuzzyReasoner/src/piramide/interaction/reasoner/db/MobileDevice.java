@@ -24,14 +24,13 @@
 package piramide.interaction.reasoner.db;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
 import piramide.interaction.reasoner.db.decay.DecayFunctionFactory;
+import piramide.interaction.reasoner.db.decay.DecayFunctionFactory.DecayFunctions;
 import piramide.interaction.reasoner.db.decay.IDecayFunction;
-import piramide.interaction.reasoner.db.decay.DecayFunctionFactory.DecayFunctions;;
 
 public class MobileDevice implements Serializable {
 	
@@ -66,13 +65,14 @@ public class MobileDevice implements Serializable {
 		return this.trends;
 	}
 	
-	List<Trend> getValidTrends() {
+	List<Trend> getValidTrends(int maxMonth) {
 		final List<Trend> validTrends = new Vector<Trend>();
 		final int maxDate = this.queryInformation.getMaxYear() * 12 + this.queryInformation.getMaxMonth();
+		final int minMaxDate = Math.min(maxDate, maxMonth);
 		
 		for(Trend trend : this.trends){
 			final int currentDate = trend.getYear() * 12 + trend.getMonth();
-			if(currentDate <= maxDate)
+			if(currentDate <= minMaxDate)
 				validTrends.add(trend);
 		}
 		
@@ -108,15 +108,15 @@ public class MobileDevice implements Serializable {
 	}
 	
 	List<Trend> calculateDecay () {
-		final Calendar cal = CalendarFactory.now();  
-		final int actualMonth = cal.get(Calendar.MONTH);
-		final int actualYear = cal.get(Calendar.YEAR);
 		final DecayFunctionFactory decayFunctionFactory = new DecayFunctionFactory();
 		final IDecayFunction decayFunction = decayFunctionFactory.create(this.decayFunction);
+		final int maxMonth = decayFunction.getMaxMonth();
+		final int actualMonth = decayFunction.getActualMonth();
+		final int actualYear = decayFunction.getActualYear();
 		
-		final int actualMonths = ((actualYear - 1) * 12) + actualMonth;
+		final int actualMonths = 12 * actualYear + actualMonth;
 		final Vector<Trend> trends = new Vector<Trend>();
-		for (Trend trend : this.getValidTrends()) {
+		for (Trend trend : this.getValidTrends(maxMonth)) {
 			final int trendMonths = ((trend.getYear() -1) * 12) + trend.getMonth();
 			final int monthsPassed = actualMonths - trendMonths;
 			final double decay = decayFunction.getDecay(monthsPassed);

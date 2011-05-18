@@ -1,7 +1,15 @@
 package piramide.interaction.reasoner.db.decay;
 
+import java.util.Calendar;
+
+import piramide.interaction.reasoner.db.CalendarFactory;
+
 public class ModelDecay implements IDecayFunction {
 
+	private final Calendar cal = CalendarFactory.now();  
+	
+	
+	
 	@Override
 	public double getDecay(int monthsPassed) {
 		double decay;
@@ -18,5 +26,20 @@ public class ModelDecay implements IDecayFunction {
 		}
 		return decay;
 	}
+	
+	@Override
+	public int getMaxMonth(){
+		return Integer.MAX_VALUE;
+	}
 
+	@Override
+	public int getActualYear(){
+		return this.cal.get(Calendar.YEAR) - 1;
+	}
+	
+	@Override
+	public int getActualMonth(){
+		return this.cal.get(Calendar.MONTH);
+	}
+	
 }

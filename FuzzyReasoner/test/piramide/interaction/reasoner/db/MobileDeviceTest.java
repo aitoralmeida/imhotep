@@ -135,7 +135,7 @@ public class MobileDeviceTest {
 	@Test
 	public void testGetValidTrends() {
 		final int allSize = this.mobileDevice.getAllTrends().size();
-		final int validTrendsSize = this.mobileDevice.getValidTrends().size();
+		final int validTrendsSize = this.mobileDevice.getValidTrends(Integer.MAX_VALUE).size();
 		
 		// There is 1 trend after what the queryInformation said
 		assertEquals(allSize - 1, validTrendsSize);

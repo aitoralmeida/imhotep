@@ -26,7 +26,7 @@ package piramide.interaction.reasoner.db;
 import java.util.Calendar;
 
 // For testing purposes
-class CalendarFactory {
+public class CalendarFactory {
 	
 	private static Calendar fakeCalendar = null;
 	
@@ -38,7 +38,7 @@ class CalendarFactory {
 		CalendarFactory.fakeCalendar = null;
 	}
 	
-	static synchronized Calendar now(){
+	public static synchronized Calendar now(){
 		if(CalendarFactory.fakeCalendar == null)
 			return Calendar.getInstance();
 		return CalendarFactory.fakeCalendar;
