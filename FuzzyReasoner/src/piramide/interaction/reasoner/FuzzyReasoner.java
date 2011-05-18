@@ -58,7 +58,8 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 	private final CacheFactory<IDatabaseManager> cacheFactory = new CacheFactory<IDatabaseManager>(IDatabaseManager.class);
 	
 	public FuzzyReasoner() throws FuzzyReasonerException{
-		this.databaseManager = this.cacheFactory.create(new DatabaseManager(), TIMEOUT);
+		// this.databaseManager = this.cacheFactory.create(new DatabaseManager(), TIMEOUT);
+		this.databaseManager = new DatabaseManager();
 	}
 	
 	IDatabaseManager getDatabaseManager(){

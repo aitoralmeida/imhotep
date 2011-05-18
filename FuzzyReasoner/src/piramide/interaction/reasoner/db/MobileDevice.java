@@ -115,7 +115,7 @@ public class MobileDevice implements Serializable {
 		final IDecayFunction decayFunction = decayFunctionFactory.create(this.decayFunction, when);
 		final int actualMonth = decayFunction.getActualMonth();
 		final int actualYear = decayFunction.getActualYear();
-		final int maxMonth = 12 * decayFunction.getActualYear() * decayFunction.getActualMonth();
+		final int maxMonth = 12 * decayFunction.getActualYear() + decayFunction.getActualMonth();
 		
 		final int actualMonths = 12 * actualYear + actualMonth;
 		final Vector<Trend> trends = new Vector<Trend>();

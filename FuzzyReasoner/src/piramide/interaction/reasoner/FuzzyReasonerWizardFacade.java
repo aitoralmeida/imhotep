@@ -53,6 +53,7 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.chart.title.Title;
 
 import piramide.interaction.reasoner.creator.FclCreator;
+import piramide.interaction.reasoner.creator.InvalidSyntaxException;
 import piramide.interaction.reasoner.creator.WarningStore;
 import piramide.interaction.reasoner.db.DatabaseException;
 import piramide.interaction.reasoner.db.DeviceCapability;
@@ -108,47 +109,10 @@ public class FuzzyReasonerWizardFacade implements IFuzzyReasonerWizardFacade {
 			img = createErrorMessagesImage("Error generating graph: invalid user variable name: " + variableName);
 		}else{
 			try {
-				final Map<DeviceCapability, Variable> deviceInputVariables = new HashMap<DeviceCapability, Variable>();
-				final Map<UserCapability, Variable> userInputVariables = new HashMap<UserCapability, Variable>();
-				final Map<String, Variable> outputVariables = new HashMap<String, Variable>();
-				final MobileDevices mobileDevices;
-				if(isInput){
-					if(isDevices){
-						mobileDevices = this.dbManager.getResults(geo, decayFunction, when);
-						
-						final Variable var = new Variable(variableName, Arrays.asList(linguisticTerms));
-						deviceInputVariables.put(DeviceCapability.valueOf(variableName), var);
-						outputVariables.put("this", new Variable("is", Arrays.asList(new RegionDistributionInfo("nt",0.5),new RegionDistributionInfo("required",0.5))));
-					}else{
-						mobileDevices = new MobileDevices(new ArrayList<MobileDevice>());
-						
-						final Variable var = new Variable(variableName, Arrays.asList(linguisticTerms));
-						userInputVariables.put(UserCapability.valueOf(variableName), var);
-						
-						outputVariables.put("this", new Variable("is", Arrays.asList(new RegionDistributionInfo("nt",0.5),new RegionDistributionInfo("required",0.5))));
-					}
-				}else{
-					mobileDevices = new MobileDevices(new ArrayList<MobileDevice>());
-					outputVariables.put(variableName, new Variable(variableName, Arrays.asList(linguisticTerms)));
-				}
-				
-				
-				final String rules = "// to generate the graph, no rule is required \n";
-				
-				final FclCreator creator = new FclCreator();
 				final WarningStore warningStore = new WarningStore();
-				
-				final Set<RegionDistributionInfo> set = new HashSet<RegionDistributionInfo>(Arrays.asList(linguisticTerms));
-				if(set.size() != linguisticTerms.length)
-					warningStore.add("Repeated values provided!");
-				
-				final String fileContent = creator.createRuleFile("temporal", deviceInputVariables, userInputVariables, outputVariables, mobileDevices, rules, warningStore);
-				
-				final ByteArrayInputStream bais = new ByteArrayInputStream(fileContent.getBytes());
-				
-				final FIS fis = FIS.load(bais,true);
-				
-				final net.sourceforge.jFuzzyLogic.rule.Variable variable = fis.getVariable(variableName);
+				final net.sourceforge.jFuzzyLogic.rule.Variable variable = processVariable(
+						isInput, isDevices, variableName, linguisticTerms, geo,
+						decayFunction, when, warningStore);
 				
 				final JFreeChart theChart = variable.chart(false);
 				
@@ -180,6 +144,55 @@ public class FuzzyReasonerWizardFacade implements IFuzzyReasonerWizardFacade {
 			e.printStackTrace();
 			return;
 		}
+	}
+
+	public net.sourceforge.jFuzzyLogic.rule.Variable processVariable(
+			boolean isInput, boolean isDevices, String variableName,
+			RegionDistributionInfo[] linguisticTerms, Geolocation geo,
+			DecayFunctions decayFunction, Calendar when,
+			final WarningStore warningStore) throws DatabaseException,
+			InvalidSyntaxException {
+		final Map<DeviceCapability, Variable> deviceInputVariables = new HashMap<DeviceCapability, Variable>();
+		final Map<UserCapability, Variable> userInputVariables = new HashMap<UserCapability, Variable>();
+		final Map<String, Variable> outputVariables = new HashMap<String, Variable>();
+		final MobileDevices mobileDevices;
+		if(isInput){
+			if(isDevices){
+				mobileDevices = this.dbManager.getResults(geo, decayFunction, when);
+				
+				final Variable var = new Variable(variableName, Arrays.asList(linguisticTerms));
+				deviceInputVariables.put(DeviceCapability.valueOf(variableName), var);
+				outputVariables.put("this", new Variable("is", Arrays.asList(new RegionDistributionInfo("nt",0.5),new RegionDistributionInfo("required",0.5))));
+			}else{
+				mobileDevices = new MobileDevices(new ArrayList<MobileDevice>());
+				
+				final Variable var = new Variable(variableName, Arrays.asList(linguisticTerms));
+				userInputVariables.put(UserCapability.valueOf(variableName), var);
+				
+				outputVariables.put("this", new Variable("is", Arrays.asList(new RegionDistributionInfo("nt",0.5),new RegionDistributionInfo("required",0.5))));
+			}
+		}else{
+			mobileDevices = new MobileDevices(new ArrayList<MobileDevice>());
+			outputVariables.put(variableName, new Variable(variableName, Arrays.asList(linguisticTerms)));
+		}
+		
+		
+		final String rules = "// to generate the graph, no rule is required \n";
+		
+		final FclCreator creator = new FclCreator();
+		
+		final Set<RegionDistributionInfo> set = new HashSet<RegionDistributionInfo>(Arrays.asList(linguisticTerms));
+		if(set.size() != linguisticTerms.length)
+			warningStore.add("Repeated values provided!");
+		
+		final String fileContent = creator.createRuleFile("temporal", deviceInputVariables, userInputVariables, outputVariables, mobileDevices, rules, warningStore);
+		
+		final ByteArrayInputStream bais = new ByteArrayInputStream(fileContent.getBytes());
+		
+		final FIS fis = FIS.load(bais,true);
+		
+		final net.sourceforge.jFuzzyLogic.rule.Variable variable = fis.getVariable(variableName);
+		return variable;
 	}
 	
     private boolean isValidDeviceVariableName(String variableName) {
