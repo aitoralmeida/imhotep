@@ -24,6 +24,7 @@
 package piramide.interaction.reasoner.db;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -41,15 +42,17 @@ public class MobileDevice implements Serializable {
 	private final List<Trend> trends;
 	private final QueryInformation queryInformation;
 	private final DecayFunctions decayFunction;
+	private final Calendar when;
 	
 	
-	public MobileDevice(String name, Map<DeviceCapability, Number> capabilities, List<Trend> trends, QueryInformation queryInformation, DecayFunctions decayFunction) {
+	public MobileDevice(String name, Map<DeviceCapability, Number> capabilities, List<Trend> trends, QueryInformation queryInformation, DecayFunctions decayFunction, Calendar when) {
 		super();
 		this.name = name;
 		this.capabilities = capabilities;
 		this.trends = trends;
 		this.queryInformation = queryInformation;
 		this.decayFunction = decayFunction;
+		this.when = when;
 	}
 	
 	public String getName() {
@@ -109,10 +112,10 @@ public class MobileDevice implements Serializable {
 	
 	List<Trend> calculateDecay () {
 		final DecayFunctionFactory decayFunctionFactory = new DecayFunctionFactory();
-		final IDecayFunction decayFunction = decayFunctionFactory.create(this.decayFunction);
-		final int maxMonth = decayFunction.getMaxMonth();
+		final IDecayFunction decayFunction = decayFunctionFactory.create(this.decayFunction, when);
 		final int actualMonth = decayFunction.getActualMonth();
 		final int actualYear = decayFunction.getActualYear();
+		final int maxMonth = 12 * decayFunction.getActualYear() * decayFunction.getActualMonth();
 		
 		final int actualMonths = 12 * actualYear + actualMonth;
 		final Vector<Trend> trends = new Vector<Trend>();

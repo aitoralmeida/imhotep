@@ -23,6 +23,7 @@
  */
 package piramide.interaction.reasoner.db;
 
+import java.util.Calendar;
 import java.util.List;
 
 import piramide.interaction.reasoner.Geolocation;
@@ -34,12 +35,12 @@ public interface IDatabaseManager {
 
 	public abstract MobileDevices getResults(int size) throws DatabaseException;
 
-	public abstract MobileDevices getResults(Geolocation geo, DecayFunctions decayFunction)
+	public abstract MobileDevices getResults(Geolocation geo, DecayFunctions decayFunction, Calendar when)
 			throws DatabaseException;
 
 	public abstract String[] getGeolocation() throws DatabaseException;
 
-	public abstract MobileDevices getResults(int size, Geolocation geo, DecayFunctions decayFunction)
+	public abstract MobileDevices getResults(int size, Geolocation geo, DecayFunctions decayFunction, Calendar when)
 			throws DatabaseException;
 
 	public abstract MobileDevice retrieveDeviceNames(String deviceID)

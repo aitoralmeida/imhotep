@@ -6,8 +6,16 @@ import piramide.interaction.reasoner.db.CalendarFactory;
 
 public class LogarithmicDecay implements IDecayFunction {
 	
-	private final Calendar cal = CalendarFactory.now();  
+	private final Calendar when;  
 	private final int logTarget = 5 * 12; //we don't take into account trends older than 5 years
+	
+	public LogarithmicDecay(Calendar when){
+		this.when = when;
+	}
+	
+	public LogarithmicDecay(){
+		this(CalendarFactory.now());
+	}
 	
 	@Override
 	public double getDecay(int monthsPassed) {
@@ -25,17 +33,12 @@ public class LogarithmicDecay implements IDecayFunction {
 	}
 
 	@Override
-	public int getMaxMonth(){
-		return Integer.MAX_VALUE;
-	}
-
-	@Override
 	public int getActualYear(){
-		return this.cal.get(Calendar.YEAR) - 1;
+		return this.when.get(Calendar.YEAR) - 1;
 	}
 	
 	@Override
 	public int getActualMonth(){
-		return this.cal.get(Calendar.MONTH);
+		return this.when.get(Calendar.MONTH);
 	}
 }

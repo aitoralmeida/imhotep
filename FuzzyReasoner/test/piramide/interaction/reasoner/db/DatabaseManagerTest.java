@@ -64,11 +64,11 @@ public class DatabaseManagerTest {
 		MobileDevice device1all = mobileDevicesAll.getMobileDevices().get(0);
 		assertEquals(25.0, device1all.getTotalTrend(), 0.0001);
 		
-		final MobileDevices mobileDevicesJapan = manager.getResults(new Geolocation("jp"), DecayFunctions.model);
+		final MobileDevices mobileDevicesJapan = manager.getResults(new Geolocation("jp"), DecayFunctions.model, CalendarFactory.now());
 		MobileDevice device1japan = mobileDevicesJapan.getMobileDevices().get(0);
 		assertEquals(100.0, device1japan.getTotalTrend(), 0.0001);
 		
-		final MobileDevices mobileDevicesSpain = manager.getResults(new Geolocation("es"), DecayFunctions.model);
+		final MobileDevices mobileDevicesSpain = manager.getResults(new Geolocation("es"), DecayFunctions.model, CalendarFactory.now());
 		MobileDevice device1spain = mobileDevicesSpain.getMobileDevices().get(0);
 		assertEquals(50.0, device1spain.getTotalTrend(), 0.0001);
 	}

@@ -38,6 +38,7 @@ import org.junit.Test;
 
 import piramide.interaction.reasoner.creator.InvalidSyntaxException;
 import piramide.interaction.reasoner.creator.WarningStore;
+import piramide.interaction.reasoner.db.CalendarFactory;
 import piramide.interaction.reasoner.db.decay.DecayFunctionFactory.DecayFunctions;
 
 public class FuzzyReasonerTest {
@@ -71,7 +72,7 @@ public class FuzzyReasonerTest {
 		initialCapabilities.put("reso_size", new Integer(10));
 		
 		final FuzzyReasoner reasoner = new FuzzyReasoner();
-		FIS fis = reasoner.generateFISobject("nokia 6630", new WarningStore(), initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, outputVariables, rules);
+		FIS fis = reasoner.generateFISobject("nokia 6630", new WarningStore(), initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, CalendarFactory.now(), outputVariables, rules);
 		Variable reso_size = fis.getVariable("reso_size");
 		HashMap<String, LinguisticTerm> resoTerms = reso_size.getLinguisticTerms();
 		assertEquals(resoTerms.size(), 3);
@@ -97,7 +98,7 @@ public class FuzzyReasonerTest {
 		initialCapabilities.put("reso_size", new Integer(10));
 		
 		final FuzzyReasoner reasoner = new FuzzyReasoner();
-		reasoner.generateFISobject("nokia 6630", new WarningStore(), initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, outputVariables, rules);		
+		reasoner.generateFISobject("nokia 6630", new WarningStore(), initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, CalendarFactory.now(), outputVariables, rules);		
 
 	}
 	
@@ -118,7 +119,7 @@ public class FuzzyReasonerTest {
 		
 		final FuzzyReasoner fuzzyReasoner = new FuzzyReasoner();
 		
-		final FIS fis = fuzzyReasoner.generateFISobject("nokia 6630", new WarningStore(), initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, outputVariables, rules);
+		final FIS fis = fuzzyReasoner.generateFISobject("nokia 6630", new WarningStore(), initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, CalendarFactory.now(), outputVariables, rules);
 		
 		final HashMap<String, HashMap<String, Double>> results = new HashMap<String, HashMap<String,Double>>();
 		
@@ -172,7 +173,7 @@ public class FuzzyReasonerTest {
 		
 		final FuzzyReasoner fuzzyReasoner = new FuzzyReasoner();
 		
-		fuzzyReasoner.generateFISobject("nokia 6630", store, initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, outputVariables, rules);
+		fuzzyReasoner.generateFISobject("nokia 6630", store, initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, CalendarFactory.now(), outputVariables, rules);
 		
 		String[] messages = store.getMessages();
 		assertEquals(1, messages.length);

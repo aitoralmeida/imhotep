@@ -25,6 +25,7 @@ package piramide.interaction.reasoner;
 
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -37,6 +38,7 @@ import net.sourceforge.jFuzzyLogic.FIS;
 import piramide.interaction.reasoner.creator.FclCreator;
 import piramide.interaction.reasoner.creator.InvalidSyntaxException;
 import piramide.interaction.reasoner.creator.WarningStore;
+import piramide.interaction.reasoner.db.CalendarFactory;
 import piramide.interaction.reasoner.db.DatabaseException;
 import piramide.interaction.reasoner.db.DatabaseManager;
 import piramide.interaction.reasoner.db.DeviceCapability;
@@ -68,7 +70,7 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 			String deviceName, 
 			WarningStore warningStore,
 			Map<String, Object> initialCapabilities,
-			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction,
+			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction, Calendar when,
 			Map<String, RegionDistributionInfo[]> outputVariables,
 			String rules) throws FuzzyReasonerException {
 
@@ -76,7 +78,7 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 		// - Is getResults() fast enough? Should a cache be used?
 		 //TODO: HAcer test
 		final FIS fis = generateFISobject(deviceName, warningStore,
-				initialCapabilities, inputVariables, geo, decayFunction, outputVariables,
+				initialCapabilities, inputVariables, geo, decayFunction, when, outputVariables,
 				rules);
 		
 		Map<String, String> inferred = new HashMap<String, String>();
@@ -100,11 +102,11 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 
 	FIS generateFISobject(String deviceName, WarningStore warningStore,
 			Map<String, Object> initialCapabilities,
-			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction,
+			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction, Calendar when, 
 			Map<String, RegionDistributionInfo[]> outputVariables, String rules)
 			throws DatabaseException, InvalidSyntaxException,
 			FuzzyReasonerException {
-		final MobileDevices mobileDevices = this.databaseManager.getResults(geo, decayFunction);
+		final MobileDevices mobileDevices = this.databaseManager.getResults(geo, decayFunction, when);
 		final MobileDevice device = this.getMobileDevice(mobileDevices, deviceName);		
 		
 		final String ruleFileContent = generateRuleFileContent(inputVariables, outputVariables, rules, mobileDevices, warningStore);
@@ -242,15 +244,15 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 			String deviceName, 
 			WarningStore warningStore, Map<String, Object> initialCapabilities,
 			Map<String, RegionDistributionInfo[]> inputVariables) throws FuzzyReasonerException {
-		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, new HashMap<String, RegionDistributionInfo[]>(), "");
+		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, CalendarFactory.now(), new HashMap<String, RegionDistributionInfo[]>(), "");
 	}
 
 	@Override
 	public Map<String, String> inferNewCapabilities(
 			String deviceName, 
 			WarningStore warningStore, Map<String, Object> initialCapabilities,
-			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction) throws FuzzyReasonerException {
-		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, geo, decayFunction, new HashMap<String, RegionDistributionInfo[]>(), "");
+			Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction, Calendar when) throws FuzzyReasonerException {
+		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, geo, decayFunction, when, new HashMap<String, RegionDistributionInfo[]>(), "");
 	}
 
 	@Override
@@ -260,6 +262,6 @@ public class FuzzyReasoner implements IFuzzyReasoner {
 			Map<String, RegionDistributionInfo[]> inputVariables, 
 			Map<String, RegionDistributionInfo[]> outputVariables,
 			String rules) throws FuzzyReasonerException {
-		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, outputVariables, rules);
+		return this.inferNewCapabilities(deviceName, warningStore, initialCapabilities, inputVariables, Geolocation.ALL, DecayFunctions.model, CalendarFactory.now(), outputVariables, rules);
 	}
 }

@@ -37,6 +37,7 @@ import org.jfree.chart.JFreeChart;
 import piramide.interaction.reasoner.RegionDistributionInfo;
 import piramide.interaction.reasoner.creator.FclCreator;
 import piramide.interaction.reasoner.creator.WarningStore;
+import piramide.interaction.reasoner.db.CalendarFactory;
 import piramide.interaction.reasoner.db.DatabaseManager;
 import piramide.interaction.reasoner.db.DeviceCapability;
 import piramide.interaction.reasoner.db.IDatabaseManager;
@@ -132,7 +133,7 @@ public class Tester {
 		final List<Trend> trends = Arrays.asList(new Trend(2009, 12, trend));
 		final Map<DeviceCapability, Number> capabilities = new HashMap<DeviceCapability, Number>();
 		capabilities.put(DeviceCapability.real_size, new Double(realSize));
-		MobileDevice device1 = new MobileDevice(name, capabilities, trends, queryInfo, DecayFunctions.model);
+		MobileDevice device1 = new MobileDevice(name, capabilities, trends, queryInfo, DecayFunctions.model, CalendarFactory.now());
 		return device1;
 	}
 }

@@ -24,6 +24,7 @@
 package piramide.interaction.reasoner;
 
 import java.io.OutputStream;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -38,9 +39,9 @@ public interface IFuzzyReasonerWizardFacade {
 	
 	public MobileDevice retrieveDeviceID(String request) throws FuzzyReasonerException;
 	
-	public void generateMembershipFunctionGraph(boolean inputOutput, boolean devicesUsers, String variableName, RegionDistributionInfo [] linguisticTerms, OutputStream destination, int width, int height, Geolocation geo, DecayFunctions decayFunction) throws FuzzyReasonerException;
+	public void generateMembershipFunctionGraph(boolean inputOutput, boolean devicesUsers, String variableName, RegionDistributionInfo [] linguisticTerms, OutputStream destination, int width, int height, Geolocation geo, DecayFunctions decayFunction, Calendar when) throws FuzzyReasonerException;
 	
 	public String [] getGeolocationRegions() throws FuzzyReasonerException;
 	
-	public FuzzyInferredResult getInferredValues(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction, Map<String, RegionDistributionInfo[]> outputVariables, String rules) throws FuzzyReasonerException;
+	public FuzzyInferredResult getInferredValues(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction, Calendar when, Map<String, RegionDistributionInfo[]> outputVariables, String rules) throws FuzzyReasonerException;
 }

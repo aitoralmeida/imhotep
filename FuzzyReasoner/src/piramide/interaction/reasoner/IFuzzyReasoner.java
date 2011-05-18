@@ -23,6 +23,7 @@
  */
 package piramide.interaction.reasoner;
 
+import java.util.Calendar;
 import java.util.Map;
 
 import piramide.interaction.reasoner.creator.WarningStore;
@@ -61,7 +62,7 @@ public interface IFuzzyReasoner {
 	 * @param geo where will the application be downloaded
 	 * @return the inferred capabilities
 	 */
-	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction) throws FuzzyReasonerException;
+	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction, Calendar when) throws FuzzyReasonerException;
 	
 	/**
 	 * Given initial capabilities, the fuzzy reasoner generates new capabilities. Example:
@@ -102,5 +103,5 @@ public interface IFuzzyReasoner {
 	 * @param rules the set of rules in FCL format
 	 * @return the inferred capabilities
 	 */
-	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction, Map<String, RegionDistributionInfo[]> outputVariables, String rules) throws FuzzyReasonerException;
+	public Map<String, String> inferNewCapabilities(String deviceName, WarningStore warningStore, Map<String, Object> initialCapabilities, Map<String, RegionDistributionInfo[]> inputVariables, Geolocation geo, DecayFunctions decayFunction, Calendar when, Map<String, RegionDistributionInfo[]> outputVariables, String rules) throws FuzzyReasonerException;
 }

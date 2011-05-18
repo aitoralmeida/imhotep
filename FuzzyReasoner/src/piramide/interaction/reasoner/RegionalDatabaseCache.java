@@ -23,6 +23,8 @@
  */
 package piramide.interaction.reasoner;
 
+import java.util.Calendar;
+
 import piramide.interaction.reasoner.db.DatabaseException;
 import piramide.interaction.reasoner.db.IDatabaseManager;
 import piramide.interaction.reasoner.db.MobileDevices;
@@ -35,14 +37,16 @@ class RegionalDatabaseCache{
 	private final IDatabaseManager dbManager;
 	private final String region;
 	private final DecayFunctions decayFunction;
+	private final Calendar when;
 	
 	private final long maxTime;
 	
-	RegionalDatabaseCache(String region, DecayFunctions decayFunction, IDatabaseManager dbManager, long maxTime){
+	RegionalDatabaseCache(String region, DecayFunctions decayFunction, Calendar when, IDatabaseManager dbManager, long maxTime){
 		this.region = region;
 		this.maxTime = maxTime;
 		this.dbManager = dbManager;
 		this.decayFunction = decayFunction;
+		this.when          = when;
 	}
 	
 	MobileDevices retrieve() throws DatabaseException{
@@ -52,7 +56,7 @@ class RegionalDatabaseCache{
 				return this.data;
 			this.creationStamp = System.currentTimeMillis();
 		}
-		this.data = this.dbManager.getResults(new Geolocation(this.region), this.decayFunction);
+		this.data = this.dbManager.getResults(new Geolocation(this.region), this.decayFunction, this.when);
 		this.creationStamp = System.currentTimeMillis();
 		return this.data;
 	}

@@ -30,6 +30,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,17 +75,17 @@ public class DatabaseManager implements IDatabaseManager {
 	
 	@Override
 	public MobileDevices getResults() throws DatabaseException {
-		return getResults(-1, Geolocation.ALL, DecayFunctions.model);
+		return getResults(-1, Geolocation.ALL, DecayFunctions.model, CalendarFactory.now());
 	}
 		
 	@Override
 	public MobileDevices getResults(int size) throws DatabaseException {
-		return getResults(size, Geolocation.ALL, DecayFunctions.model);
+		return getResults(size, Geolocation.ALL, DecayFunctions.model, CalendarFactory.now());
 	}
 		
 	@Override
-	public MobileDevices getResults(Geolocation geo, DecayFunctions decayFunction) throws DatabaseException {
-		return getResults(-1, geo, decayFunction);
+	public MobileDevices getResults(Geolocation geo, DecayFunctions decayFunction, Calendar when) throws DatabaseException {
+		return getResults(-1, geo, decayFunction, when);
 	}
 	
 	@Override
@@ -104,7 +105,7 @@ public class DatabaseManager implements IDatabaseManager {
 	}
 	
 	@Override
-	public MobileDevices getResults(int size, Geolocation geo, DecayFunctions decayFunction) throws DatabaseException {
+	public MobileDevices getResults(int size, Geolocation geo, DecayFunctions decayFunction, Calendar when) throws DatabaseException {
 		final QueryInformation queryInformation = new QueryInformation();
 		
 		final List<MobileDevice> devices = new Vector<MobileDevice>();
@@ -143,7 +144,7 @@ public class DatabaseManager implements IDatabaseManager {
 					break;
 				final MaxDateHolder currentMaxDate = new MaxDateHolder();
 				
-				final MobileDevice mobileDevice = retrieveMobileDevice(geo, queryInformation, con, rsDevices, currentMaxDate, decayFunction);
+				final MobileDevice mobileDevice = retrieveMobileDevice(geo, queryInformation, con, rsDevices, currentMaxDate, decayFunction, when);
 				devices.add(mobileDevice);
 				
 				if(currentMaxDate.getCurrentMaxDate() != 0 && currentMaxDate.getCurrentMaxDate() < maxDate)
@@ -164,7 +165,8 @@ public class DatabaseManager implements IDatabaseManager {
 
 	private MobileDevice retrieveMobileDevice(Geolocation geo,
 			final QueryInformation queryInformation, final Connection con,
-			final ResultSet rsDevices, final MaxDateHolder currentMaxDate, DecayFunctions decayFunction)
+			final ResultSet rsDevices, final MaxDateHolder currentMaxDate, DecayFunctions decayFunction,
+			Calendar when)
 			throws SQLException {
 		final PreparedStatement stmtTrends = con.prepareStatement("SELECT value, year, month FROM Trends WHERE device_name = ? AND region = ?");
 		stmtTrends.setString(1, rsDevices.getString("device_name"));
@@ -187,7 +189,7 @@ public class DatabaseManager implements IDatabaseManager {
 			capabilities.put(capability, (Number)rsDevices.getObject(capability.name()));
 		
 		
-		return new MobileDevice(rsDevices.getString("device_name"), capabilities, trends, queryInformation, decayFunction);
+		return new MobileDevice(rsDevices.getString("device_name"), capabilities, trends, queryInformation, decayFunction, when);
 	}
 	
 	private static class MaxDateHolder{
@@ -226,7 +228,7 @@ public class DatabaseManager implements IDatabaseManager {
 			final QueryInformation info = new QueryInformation();
 			final MaxDateHolder currentMaxDate = new MaxDateHolder();
 			
-			return retrieveMobileDevice(Geolocation.ALL, info, con, dbResults, currentMaxDate, DecayFunctions.model);
+			return retrieveMobileDevice(Geolocation.ALL, info, con, dbResults, currentMaxDate, DecayFunctions.model, CalendarFactory.now());
 		} catch (SQLException e) {
 			throw new DatabaseException("Database error: " + e.getMessage(), e);
 		} finally {
@@ -298,7 +300,7 @@ public class DatabaseManager implements IDatabaseManager {
 				final QueryInformation info = new QueryInformation();
 				final MaxDateHolder currentMaxDate = new MaxDateHolder();
 				
-				final MobileDevice mobileDevice = retrieveMobileDevice(Geolocation.ALL, info, con, dbResults, currentMaxDate, DecayFunctions.model);
+				final MobileDevice mobileDevice = retrieveMobileDevice(Geolocation.ALL, info, con, dbResults, currentMaxDate, DecayFunctions.model, CalendarFactory.now());
 				results.add(mobileDevice);
 			}
 			

@@ -89,7 +89,7 @@ public class MobileDeviceTest {
 		// A trend after the queryInformation
 		trends.add(new Trend(2010, 1, 40));
 		
-		return new MobileDevice("muzzy", capabilities, trends, queryInformation, DecayFunctions.model);
+		return new MobileDevice("muzzy", capabilities, trends, queryInformation, DecayFunctions.model, CalendarFactory.now());
 	}
 	
 	static MobileDevice createMobileDevice2() {
@@ -106,7 +106,7 @@ public class MobileDeviceTest {
 		// A trend which is trend > 60
 		trends.add(new Trend(2009, 12, 10));
 		
-		return new MobileDevice("muzzy2", capabilities, trends, queryInformation, DecayFunctions.model);
+		return new MobileDevice("muzzy2", capabilities, trends, queryInformation, DecayFunctions.model, CalendarFactory.now());
 	}
 		
 	static MobileDevice createMobileDevice3() {
@@ -123,7 +123,7 @@ public class MobileDeviceTest {
 		// A trend which is trend > 60
 		trends.add(new Trend(2009, 12, 10));
 		
-		return new MobileDevice("muzzy2", capabilities, trends, queryInformation, DecayFunctions.model);
+		return new MobileDevice("muzzy2", capabilities, trends, queryInformation, DecayFunctions.model, CalendarFactory.now());
 	}
 		
 	
