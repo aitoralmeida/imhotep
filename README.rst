@@ -110,11 +110,16 @@ Awards
 ======
 
 *Title:* Assisted City.
+
 *Award:* Best application in the Navigate, within the Via Inteligente awards for
 services oriented to citizens.
+
 *Entity:* Via Inteligente
+
 *Date:* March 7th, 2012
+
 *Authors:* Aitor Almeida, Pablo Orduña, Eduardo Castillejo, Diego López-de-Ipiña
+
 *Link:* http://www.viainteligente.com/premios2012.html
 
 Publications
