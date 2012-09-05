@@ -106,9 +106,29 @@ combinations of colours can cause problems, so they are tested. In the future,
 other types of tests, for instance testing if the user can move the mobile
 device as expected, should be implemented.
 
+Awards
+======
+
+*  Aitor Almeida, Pablo Orduña, Eduardo Castillejo, Diego López-de-Ipiña. Assisted City. Best application in the Navigate, within the Via Inteligente awards for services oriented to citizens. Via Inteligente. March 7th, 2012. `Link <http://www.viainteligente.com/premios2012.html>`_.
+
 Publications
 ============
 
+
+* Aitor Almeida, Pablo Orduña, Eduardo Castillejo, Diego López-de-Ipiña, Marcos
+  Sacristan. A method for automatic generation of fuzzy membership functions for
+  mobile device's characteristics based on Google Trends. Computers in Human
+  Behaviour (Journal). Impact Factor (2011): 2.293 DOI:
+  10.1016/j.chb.2012.06.005. 2012. 2012.
+* Aitor Almeida, Pablo Orduña, Eduardo Castillejo, Diego López-de-Ipiña, Marcos
+  Sacristán. An approach to automatic generation of fuzzy membership functions
+  using popularity metrics. 4th World Summit on the Knowledge Society. Mykonos,
+  Greece, September, 2011.
+* Aitor Almeida, Pablo Orduña, Eduardo Castillejo, Diego López-de-Ipiña, Marcos
+  Sacristán. Adaptative applications for heterogeneous intelligent environments.
+  ICOST 2011: 9th International Conference on Smart Homes and Health Telematics.
+  Montréal, Canada, June 2011. LNCS6719, Toward Useful Services for Elderly and
+  People with Disabilities, Springer, ISBN: 978-3-642-21534-6, pp. 1-8
 * Aitor Almeida, Pablo Orduña, Eduardo Castillejo, Diego Lopez-de-Ipiña, Marcos
   Sacristan. Imhotep: an approach to user and device conscious mobile
   applications Personal and Ubiquitous Computing (Journal). Springer. Impact
