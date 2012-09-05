@@ -109,8 +109,8 @@ device as expected, should be implemented.
 Awards
 ======
 
-*  Aitor Almeida, Pablo Orduña, Eduardo Castillejo, Diego López-de-Ipiña. Assisted City. **Best application in the Navigate, within the Via Inteligente awards for
-services oriented to citizens.** Via Inteligente. March 7th, 2012. `Link <http://www.viainteligente.com/premios2012.html>`_.
+*  Aitor Almeida, Pablo Orduña, Eduardo Castillejo, Diego López-de-Ipiña. Assisted City. Best application in the Navigate, within the Via Inteligente awards for
+services oriented to citizens. Via Inteligente. March 7th, 2012. `Link <http://www.viainteligente.com/premios2012.html>`_.
 
 Publications
 ============
